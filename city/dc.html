@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sunset map</title>
+
+<script type="text/javascript" src="../js/core.js"></script>
+<script type="text/javascript" src="../js/settings.js"></script>
+<script type="text/javascript" src="../js/mercator.js"></script>
+<script type="text/javascript" src="../js/geometry.js"></script>
+<script type="text/javascript" src="../js/model.js"></script>
+<script type="text/javascript" src="../js/renderer.js"></script>
+<script type="text/javascript" src="../js/shader.js"></script>
+
+
+<script type="text/javascript" src="../js/cartodb.sql.js"></script>
+<script type="text/javascript" src="../js/cartodb.provider.js"></script>
+
+<!-- carto -->
+<script src='../libs/underscore.js' type='text/javascript'></script>
+<script src='../libs/carto.js' type='text/javascript'></script>
+
+<script type="text/javascript" src="../libs/suncalc.js"></script>
+<script type="text/javascript" src="../libs/modestmaps.js"></script>
+<script type="text/javascript" src="../js/vecnik.modestmaps.js"></script>
+
+<script type="text/javascript" src="../js/carto.js"></script>
+
+<style>
+html, body, #map {
+  width: 100%; height: 100%;
+  padding: 0;
+  margin: 0;
+}
+.tod {
+  position: absolute;
+  right: 30px;
+  top: 200px;
+  background-color: #AAA;
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font: bold 16px Helvetica;
+}
+#livecode {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 450px;
+  padding-left: 10px;
+  box-shadow: 0px 0px 5px 6px #ccc;
+}
+textarea {
+  color: rgba(0,0,0,0.9);
+  background-color:rgba(255,255,255,0.7);
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  font-family: monospace;
+  font-size: 19px;
+  width: 450px;
+  border: 0;
+  outline: none;
+
+}
+.highlight {
+  font-family: monospace;
+  font-size: 19px;
+}
+.button {
+  position: absolute;
+  left: 30px;
+  bottom: 40px;
+  background-color: #AAA;
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font: bold 16px Helvetica;
+  /*width: 114px;*/
+}
+input[type="range"] {
+    -webkit-appearance: none;
+    background-color: gray;  
+    height: 2px;
+    position: absolute;
+    bottom: 56px;
+    left: 180px;
+    width: 50%;
+    z-index: 111;
+}
+  
+input[type='range']::-webkit-slider-thumb {  
+    -webkit-appearance: none;  
+    background-color: #aaaaaa;  
+    width: 13px;  
+    height: 20px;  
+}
+
+</style>
+</head>
+   <body>
+   <div id="map"></div>
+  <!--<div id="livecode" class="highlight">-->
+   </div>
+   <a href='#' class="button" id="start_animation">start animation</a>
+   <div class="tod" id="tod"></div>
+   <input type="range" id="rangeinput" value="1" min="1" max="365"/>
+
+<script type="text/javascript" src="../js/app.js"></script>
+<script type="text/javascript">
+    var city = {y: 38.8993524437598, x: -77.0319457761469, z: 13, account: 'viz2', table: 'henge_dc', offset: '-4'};
+    window.onload = function(){initMap()}
+</script>
+
+</body>
+</html>
+
