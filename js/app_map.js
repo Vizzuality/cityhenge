@@ -273,13 +273,14 @@ function paintSun() {
 
   var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
   var a = sunrisePos.azimuth;
+  console.log(a);
   var r = 150;
 
   // Line
   context.beginPath();
   context.moveTo(p1.x, p1.y);
 
-  context.lineTo(Math.cos(a*180/Math.PI)*r, Math.sin(a*180/Math.PI)*r);
+  context.lineTo(Math.cos(a*180/Math.PI)*r, Math.sin(a*180/Math.PI)*r); // ?
 
   context.lineWidth = 2;
   context.strokeStyle = '#fff';
