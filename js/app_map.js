@@ -36,11 +36,9 @@ function updateDate(left) {
 function onDrag(e) {
   var w = $(e.target).position().left
   $(".highlight").width(w + 20);
-  console.log(w);
-
   var c = map.getCenter();
-  console.log(tod.getTime());
-  tt = SunCalc.getTimes(curtod.setTime( tod.getTime() + w * 1000 * 60 * 60 * 24 ), c.lat, c.lon);
+  tt = SunCalc.getTimes(curtod.setTime( tod.getTime() + w/10 * 1000 * 60 * 60 * 24 ), c.lat, c.lon);
+  console.log(tt.sunset);
 
   updateDate(w);
   curtod = new Date(tt.sunset);
@@ -172,15 +170,11 @@ var primitive_render = this.primitive_render = {
 };
 
 }
+
 SketchRender.prototype = new VECNIK.Renderer();
 
-var d = new Date();
+var d = new Date(2013,5,1); // start in 01 Jun 2013
 var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-
-// tod.setHours(2);
-// tod.setMinutes(0);
-
-// var c = map.getCenter();
 
 function displayTime(t){
   // var t = new Date(o);
