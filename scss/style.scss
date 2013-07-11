@@ -191,6 +191,7 @@ a.button:hover{
 
   $sliderHeight: 71px;
   position:relative;
+  z-index: 100000;
 
   display: block;
   @include position(false, false, 0, 0);
@@ -264,14 +265,8 @@ a.button:hover{
   }
 }
 
+
 #sun {
-
-  @include size(10px);
-  background:#fff;
-  padding: 10px;
-  @include border-radius(100px);
-  @include position(100px, false, false, 200px);
+  position:absolute;
   z-index: 1000;
-
 }
-

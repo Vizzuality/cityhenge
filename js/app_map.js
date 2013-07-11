@@ -1,6 +1,6 @@
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var months2 = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"];
-var tt, shader, tod, map, curtod, city;
+var context, tt, shader, tod, map, curtod, city;
 
 function adjustMonths(l) {
 
@@ -37,15 +37,15 @@ function getDayNumber() {
 
 $(function() {
 
-/*
+
 var d = getDayNumber();
 var ratio = 365/$(document).width();
-alert(ratio);
 
 $(".highlight").css({ width: d * (1-ratio) });
 $(".handle").css({ left: d * (1-ratio) - 10 });
-*/
+
 setupMonths();
+
 
 $("#slider").on("click", function(e) {
 
@@ -61,6 +61,11 @@ $("#slider").on("click", function(e) {
   tt     = SunCalc.getTimes(time, c.lat, c.lon);
   curtod = new Date(tt.sunset);
 
+
+  var cen = map.getCenter();
+  var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
+  console.log(sunrisePos.azimuth);
+
   updateDate(w - 10);
 
   $(".handle").css({ left: w - 10 });
@@ -68,9 +73,8 @@ $("#slider").on("click", function(e) {
 
   $(".date").stop().fadeIn(250, function() {
     $(this).delay(2000).fadeOut(250);
-  updateMap();
+    updateMap();
   });
-
 
 
 });
@@ -103,7 +107,6 @@ function updateDate(left) {
 
     var cen = map.getCenter();
     var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
-    //console.log(sunrisePos.azimuth);
     var day   = tt.sunset.getDate();
     $(".date").html(month + ", " + day + "<span class='suffix'>" + get_nth_suffix(day) + "</span>");
   }
@@ -168,14 +171,11 @@ $( "#slider .handle" ).draggable({
   stop: onStop
 });
 
-//var vis = cartodb.createVis('mapContainer', 'http://viz2.cartodb.com/api/v1/viz/new_york_osm_line_clean/viz.json');
-//vis.done(function(vis, layers) { });
-
 });
 
 
-
 function SketchRender() {
+
   RND_FACTOR = 1;
   rnd = function() { return RND_FACTOR*( 2*Math.random() -1) ;}
 
@@ -196,7 +196,7 @@ function SketchRender() {
 
     var r = Math.atan2(p1.y - p0.y, p1.x - p0.x) + 0.5*Math.PI;
     r = r < 0 ? r+Math.PI*2 : r;
-     //console.log(sunrisePos.azimuth, r)
+    //console.log(sunrisePos.azimuth, r)
     var d = Math.abs((r + Math.PI -  a) % (Math.PI*2) - Math.PI)
 
     // d = d < Math.PI ? d : d - Math.PI;
@@ -239,18 +239,6 @@ var primitive_render = this.primitive_render = {
     var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
     //console.log(curtod)
 
-
-
-
-
-
-
-
-
-
-
-
-
     for(var i=1; i < c.length; ++i) {
       sketchLine(ctx, c[i-1], c[i], sunrisePos);
       var p0 = c[i-1];
@@ -276,6 +264,48 @@ var primitive_render = this.primitive_render = {
 
 }
 
+function paintSun() {
+
+  var cen = map.getCenter();
+
+  var l1 = new MM.Location(cen.lat, cen.lon);
+  var p1 = map.locationPoint(l1);
+
+  var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
+  var a = sunrisePos.azimuth;
+  var r = 150;
+
+  // Line
+  context.beginPath();
+  context.moveTo(p1.x, p1.y);
+
+  context.lineTo(Math.cos(a*180/Math.PI)*r, Math.sin(a*180/Math.PI)*r);
+
+  context.lineWidth = 2;
+  context.strokeStyle = '#fff';
+  context.stroke();
+
+  // Sun
+  context.beginPath();
+  context.arc(p1.x - 300, p1.y, 15, 0, 2 * Math.PI, false);
+  context.fillStyle = '#fff';
+  context.fill();
+  context.lineWidth = 0;
+  context.stroke();
+
+  // Path
+  context.beginPath();
+  context.globalAlpha = 0.09;
+  context.arc(p1.x, p1.y, 300, 0, 2 * Math.PI, false);
+  context.fillStyle = 'none';
+  context.fill();
+  context.lineWidth = 30;
+  context.strokeStyle = '#fff';
+  context.stroke();
+  context.restore();
+
+}
+
 SketchRender.prototype = new VECNIK.Renderer();
 
 var d = new Date(2013, 6, 1);
@@ -292,8 +322,8 @@ function initMap(options) {
     "#world { line-width: 2; line-color: #000; [TYPEY='test']{ line-width: 2; } [ZOOM = 0]{ line-width: 2; } }"
     , function() {});
   });
-  // var stat = new Stats();
 
+  // var stat = new Stats();
 
   var template = '../img/bk.png'
   var subdomains = [ '', 'a.', 'b.', 'c.' ];
@@ -305,6 +335,7 @@ function initMap(options) {
     ENABLE_FIXING: true,
     ENABLE_SNAPPING: true,
   });
+
   var dataSource = new VECNIK.CartoDB.API({
     user: city.account,
     table: city.table,
@@ -332,6 +363,15 @@ function initMap(options) {
   if (!location.hash) {
     map.setCenterZoom(new MM.Location(city.y, city.x ), city.z);
   }
+
+  var canvas = document.getElementById("sun");
+  context = canvas.getContext("2d");
+
+  canvas.width  = $(document).width();
+  canvas.height = $(document).height();
+
+  paintSun();
+
 
 
 }
