@@ -1,4 +1,5 @@
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+var months2 = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"];
 var tt, shader, tod, map, curtod, city;
 
 function adjustMonths(l) {
@@ -36,12 +37,14 @@ function getDayNumber() {
 
 $(function() {
 
+/*
 var d = getDayNumber();
 var ratio = 365/$(document).width();
+alert(ratio);
 
 $(".highlight").css({ width: d * (1-ratio) });
 $(".handle").css({ left: d * (1-ratio) - 10 });
-
+*/
 setupMonths();
 
 $(window).resize(function(){
@@ -68,7 +71,8 @@ function updateDate(left) {
   }
 
   if (tt) {
-    var month = months[tt.sunset.getMonth()];
+    var month = months2[tt.sunset.getMonth() ];
+    console.log(tt.sunset.getMonth());
     var day   = tt.sunset.getDate();
     $(".date").html(month + ", " + day + "<span class='suffix'>" + get_nth_suffix(day) + "</span>");
   }
@@ -87,8 +91,9 @@ function onDrag(e) {
   var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
   tt = SunCalc.getTimes(time, c.lat, c.lon);
 
-  //console.log(tt.sunset);
-  //console.log($(".date").width() , $(".date").position().left, $("document").width());
+  console.log(tt.sunset);
+
+  console.log($(".date").width() , $(".date").position().left, $("document").width());
 
   updateDate(w);
   curtod = new Date(tt.sunset);
@@ -225,7 +230,7 @@ var primitive_render = this.primitive_render = {
 
 SketchRender.prototype = new VECNIK.Renderer();
 
-var d = new Date(2013,6,1); // start in 01 Jun 2013
+var d = new Date(2013, 6, 1);
 var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
 
 function initMap(options) {
