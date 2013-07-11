@@ -56,7 +56,6 @@ function onDrag(e) {
 
   updateDate(w);
   curtod = new Date(tt.sunset);
-  displayTime(curtod);
 }
 
 function onStart(e) {
@@ -190,23 +189,11 @@ SketchRender.prototype = new VECNIK.Renderer();
 var d = new Date(2013,5,1); // start in 01 Jun 2013
 var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
 
-function displayTime(t){
-  // var t = new Date(o);
-  var fieldNameElement = document.getElementById("tod");
-  hr = t.getMonth() + 1 + '';
-  while (hr.length < 2) hr = '0'+hr;
-  mi = t.getDate() + '';
-  while (mi.length < 2) mi = '0'+mi;
-  fieldNameElement.innerHTML =  hr + " - " + mi;
-}
-
 function initMap(options) {
   city = options;
   tod = new Date(utc + (3600000 * city.offset));
   var tt = SunCalc.getTimes(tod, city.y, city.x );
   curtod = new Date(tt.sunset);
-
-  displayTime(curtod);
 
   VECNIK.Carto.init(function(carto) {
     VECNIK.Carto.compile(
@@ -259,7 +246,6 @@ function initMap(options) {
     var c = map.getCenter();
     curtod = SunCalc.getTimes(curtod.setTime( tod.getTime() + t * 1000 * 60 * 60 * 24 ), c.lat, c.lon);
     curtod = new Date(curtod.sunset);
-    displayTime(curtod);
     t = t + 2;
     VECNIK.Carto.compile(
     "#world { line-width: 2; line-color: #000; [TYPEY='test']{ line-width: 2; } [ZOOM = 0]{ line-width: 2; } }", function(shaderData) {
