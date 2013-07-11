@@ -11,6 +11,8 @@ html, body { height:100%; width:100%; margin:0; }
 
 html {
 
+  background: #000;
+
   &.home {
     background: url(../img/bkg.jpg) no-repeat center center fixed;
     @include background-size(cover);
@@ -193,26 +195,38 @@ a.button:hover{
 }
 
 #slider {
+  $sliderHeight: 71px;
+  position:relative;
+
   display: block;
   @include position(false, false, 0, 0);
-  @include size(100%, 71px);
+  @include size(100%, $sliderHeight);
   background-color: #111;
-  border-top: 1px solid rgba(255,255,255,0.2);
-}
 
-.handle {
-  @include size(20px, 100%);
-  left: 100px;
-  background: #0099EF;
-  cursor: ew-resize;
-  z-index: 10;
-}
+  .border {
+    position:absolute;
+    top: 0; left: 0;
+    @include size(100%, 1px);
+    background-color: #fff;
+    @include opacity(.2);
+    z-index: 20;
+  }
 
-.highlight {
-  background: #0099EF;
-  @include size(100px, 100%);
-  position:absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
+  .handle {
+    @include size(20px, $sliderHeight);
+    top: 0px;
+    left: 100px;
+    background: #0099EF;
+    cursor: ew-resize;
+    z-index: 10;
+  }
+
+  .highlight {
+    background: #0099EF;
+    @include size(100px, $sliderHeight);
+    position:absolute;
+    top: 0px;
+    left: 0;
+    z-index: 1;
+  }
 }
