@@ -4,6 +4,17 @@ $(function() {
 
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+
+  var j = 5;
+
+  for (var i = 0; i<=11; i++) {
+
+    var $li = $("<li class='month_"+(i + j)+"'>" + months[(i+j)%12] + "</li>");
+    $("#slider .months").append($li);
+    $li.css({ left: (i + 0) * 100 });
+  }
+
+
 function updateDate(left) {
 
   function get_nth_suffix(date) {
@@ -37,7 +48,10 @@ function onDrag(e) {
   var w = $(e.target).position().left
   $(".highlight").width(w + 20);
   var c = map.getCenter();
-  tt = SunCalc.getTimes(curtod.setTime( tod.getTime() + w/10 * 1000 * 60 * 60 * 24 ), c.lat, c.lon);
+  var time = curtod.setTime( tod.getTime() + w/3 * 1000 * 60 * 60 * 24 );
+  console.log(time);
+  tt = SunCalc.getTimes(time, c.lat, c.lon);
+
   console.log(tt.sunset);
 
   updateDate(w);
