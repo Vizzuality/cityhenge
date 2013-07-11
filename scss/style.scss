@@ -11,12 +11,13 @@ html, body { height:100%; width:100%; margin:0; }
 
 html {
 
-  background: url(../img/bkg.jpg) no-repeat center center fixed;
+  &.home {
+    background: url(../img/bkg.jpg) no-repeat center center fixed;
+    @include background-size(cover);
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.../img/bkg.jpg', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bkg.jpg', sizingMethod='scale')";
+  }
 
-  @include background-size(cover);
-
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.../img/bkg.jpg', sizingMethod='scale');
-  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bkg.jpg', sizingMethod='scale')";
 }
 
 body{
