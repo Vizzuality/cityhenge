@@ -62,14 +62,15 @@ $("#slider").on("click", function(e) {
   curtod = new Date(tt.sunset);
 
   updateDate(w - 10);
-  updateMap();
 
   $(".handle").css({ left: w - 10 });
   $(".highlight").animate({ width: w + "px"}, 150);
 
   $(".date").stop().fadeIn(250, function() {
     $(this).delay(2000).fadeOut(250);
+  updateMap();
   });
+
 
 
 });
@@ -236,7 +237,20 @@ var primitive_render = this.primitive_render = {
     ymin = ymax = c[0].y;
     var cen = map.getCenter();
     var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
-    // console.log(c)
+    //console.log(curtod)
+
+
+
+
+
+
+
+
+
+
+
+
+
     for(var i=1; i < c.length; ++i) {
       sketchLine(ctx, c[i-1], c[i], sunrisePos);
       var p0 = c[i-1];
@@ -310,34 +324,13 @@ function initMap(options) {
   });
 
   var vector_layer = new VECNIK.MM.CanvasProvider(dataSource, shader, new SketchRender());
+
   fg = new MM.Layer(vector_layer);
 
   map = new MM.Map(document.getElementById('map'), [provider,  fg])
 
-  if(!location.hash) {
+  if (!location.hash) {
     map.setCenterZoom(new MM.Location(city.y, city.x ), city.z);
-  }
-  var hash = new MM.Hash(map);
-  var t = 0;
-  var button = document.getElementById('start_animation');
-  function animate(){
-    var c = map.getCenter();
-    curtod = SunCalc.getTimes(curtod.setTime( tod.getTime() + t * 1000 * 60 * 60 * 24 ), c.lat, c.lon);
-    curtod = new Date(curtod.sunset);
-    t = t + 2;
-    VECNIK.Carto.compile(
-    "#world { line-width: 2; line-color: #000; [TYPEY='test']{ line-width: 2; } [ZOOM = 0]{ line-width: 2; } }", function(shaderData) {
-      if(shaderData) {
-        shader.compile(shaderData);
-      }
-    });
-    document.getElementById('rangeinput').value = t;
-    if(t >= 365) {
-      button.style.display = 'block';
-      } else {
-      setTimeout(animate, 0.1);
-      // animate();
-    }
   }
 
 
