@@ -1,21 +1,45 @@
-var shader, tod, map, curtod, city;
+var tt, shader, tod, map, curtod, city;
 
 $(function() {
 
-var months = [];
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function updateDate(left) {
+
+  if (tt) {
+    var month = months[tt.sunset.getMonth() + 1];
+    $(".date").html(month);
+  }
+  $(".date").css({ left: left });
+
+}
 
 function onDrag(e) {
   var w = $(e.target).position().left
   $(".highlight").width(w + 20);
+  console.log(w);
 
   var c = map.getCenter();
-  var tt = SunCalc.getTimes(curtod.setTime( tod.getTime() + w * 1000 * 60 * 60 * 24 ), c.lat, c.lon);
-  console.log(curtod);
+  console.log(tod.getTime());
+  tt = SunCalc.getTimes(curtod.setTime( tod.getTime() + w * 1000 * 60 * 60 * 24 ), c.lat, c.lon);
+
+  updateDate(w);
   curtod = new Date(tt.sunset);
   displayTime(curtod);
 }
 
+function onStart(e) {
+
+  var w = $(e.target).position().left
+
+  updateDate(w);
+  $(".date").fadeIn(250);
+
+}
+
 function onStop(e) {
+
+  $(".date").fadeOut(250);
 
   VECNIK.Carto.compile(
   "#world { line-width: 2; line-color: #000; [TYPEY='test']{ line-width: 2; } [ZOOM = 0]{ line-width: 2; } }", function(shaderData) {
@@ -29,6 +53,7 @@ function onStop(e) {
 $( "#slider .handle" ).draggable({
   containment: "parent",
   axis: "x",
+  start: onStart,
   drag: onDrag,
   stop: onStop
 });
@@ -150,7 +175,7 @@ function displayTime(t){
 
 function initMap(options) {
   city = options;
-  tod = new Date(utc + (3600000*city.offset));
+  tod = new Date(utc + (3600000 * city.offset));
   var tt = SunCalc.getTimes(tod, city.y, city.x );
   curtod = new Date(tt.sunset);
 
