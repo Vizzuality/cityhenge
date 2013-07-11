@@ -6,10 +6,29 @@ var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
 
 function updateDate(left) {
 
+  function get_nth_suffix(date) {
+   switch (date) {
+     case 1:
+     case 21:
+     case 31:
+        return 'st';
+     case 2:
+     case 22:
+        return 'nd';
+     case 3:
+     case 23:
+        return 'rd';
+     default:
+        return 'th';
+   }
+ }
+
   if (tt) {
-    var month = months[tt.sunset.getMonth() + 1];
-    $(".date").html(month);
+    var month = months[tt.sunset.getMonth()];
+    var day   = tt.sunset.getDate();
+    $(".date").html(month + ", " + day + get_nth_suffix(day));
   }
+
   $(".date").css({ left: left });
 
 }
