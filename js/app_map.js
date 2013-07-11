@@ -49,26 +49,28 @@ setupMonths();
 
 $("#slider").on("click", function(e) {
 
+  $(".date").hide();
+
   var ratio = $(document).width()/365;
 
   var w = e.screenX;
 
   var c = map.getCenter();
   var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
-  tt = SunCalc.getTimes(time, c.lat, c.lon);
 
-  updateDate(w);
+  tt     = SunCalc.getTimes(time, c.lat, c.lon);
   curtod = new Date(tt.sunset);
 
-  VECNIK.Carto.compile(
-  "#world { line-width: 2; line-color: #000; [TYPEY='test']{ line-width: 2; } [ZOOM = 0]{ line-width: 2; } }", function(shaderData) {
-    if(shaderData) {
-      shader.compile(shaderData);
-    }
-  });
+  updateDate(w - 10);
+  updateMap();
 
   $(".handle").css({ left: w - 10 });
   $(".highlight").animate({ width: w + "px"}, 150);
+
+  $(".date").stop().fadeIn(250, function() {
+    $(this).delay(2000).fadeOut(250);
+  });
+
 
 });
 
@@ -109,6 +111,17 @@ function updateDate(left) {
 
 }
 
+function updateMap() {
+
+  VECNIK.Carto.compile(
+  "#world { line-width: 2; line-color: #000; [TYPEY='test']{ line-width: 2; } [ZOOM = 0]{ line-width: 2; } }", function(shaderData) {
+    if(shaderData) {
+      shader.compile(shaderData);
+    }
+  });
+}
+
+
 function onDrag(e) {
 
   var ratio = $(document).width()/365;
@@ -142,12 +155,7 @@ function onStop(e) {
   $(".date").fadeOut(250);
   $(".highlight").width(w + 10);
 
-  VECNIK.Carto.compile(
-  "#world { line-width: 2; line-color: #000; [TYPEY='test']{ line-width: 2; } [ZOOM = 0]{ line-width: 2; } }", function(shaderData) {
-    if(shaderData) {
-      shader.compile(shaderData);
-    }
-  });
+  updateMap();
 
 }
 
