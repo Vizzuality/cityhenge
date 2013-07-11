@@ -249,7 +249,7 @@ a.button:hover{
   .handle {
     @include size(20px, $sliderHeight);
     top: 0px;
-    left: 100px;
+    left: 110px;
     cursor: ew-resize;
     z-index: 100;
   }

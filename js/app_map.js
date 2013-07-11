@@ -69,7 +69,7 @@ function onDrag(e) {
   var ratio = $(document).width()/365;
 
   var w = $(e.target).position().left
-  $(".highlight").width(w + 20);
+  $(".highlight").width(w + 10);
   var c = map.getCenter();
   var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
   console.log(time);
@@ -95,7 +95,7 @@ function onStop(e) {
   var w = $(e.target).position().left
 
   $(".date").fadeOut(250);
-  $(".highlight").width(w + 20);
+  $(".highlight").width(w + 10);
 
   VECNIK.Carto.compile(
   "#world { line-width: 2; line-color: #000; [TYPEY='test']{ line-width: 2; } [ZOOM = 0]{ line-width: 2; } }", function(shaderData) {
