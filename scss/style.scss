@@ -242,6 +242,7 @@ a.button:hover{
       @include opacity(.5);
       /*@include simple-transition(all, 100ms);*/
       text-transform: uppercase;
+      cursor: pointer;
     }
   }
 
@@ -262,3 +263,15 @@ a.button:hover{
     z-index: 1;
   }
 }
+
+#sun {
+
+  @include size(10px);
+  background:#fff;
+  padding: 10px;
+  @include border-radius(100px);
+  @include position(100px, false, false, 200px);
+  z-index: 1000;
+
+}
+

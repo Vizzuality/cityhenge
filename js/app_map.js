@@ -47,6 +47,31 @@ $(".handle").css({ left: d * (1-ratio) - 10 });
 */
 setupMonths();
 
+$("#slider").on("click", function(e) {
+
+  var ratio = $(document).width()/365;
+
+  var w = e.screenX;
+
+  var c = map.getCenter();
+  var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
+  tt = SunCalc.getTimes(time, c.lat, c.lon);
+
+  updateDate(w);
+  curtod = new Date(tt.sunset);
+
+  VECNIK.Carto.compile(
+  "#world { line-width: 2; line-color: #000; [TYPEY='test']{ line-width: 2; } [ZOOM = 0]{ line-width: 2; } }", function(shaderData) {
+    if(shaderData) {
+      shader.compile(shaderData);
+    }
+  });
+
+  $(".handle").css({ left: w - 10 });
+  $(".highlight").animate({ width: w + "px"}, 150);
+
+});
+
 $(window).resize(function(){
   adjustMonths(document.body.clientWidth);
 });
@@ -72,7 +97,10 @@ function updateDate(left) {
 
   if (tt) {
     var month = months2[tt.sunset.getMonth() ];
-    console.log(tt.sunset.getMonth());
+
+    var cen = map.getCenter();
+    var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
+    //console.log(sunrisePos.azimuth);
     var day   = tt.sunset.getDate();
     $(".date").html(month + ", " + day + "<span class='suffix'>" + get_nth_suffix(day) + "</span>");
   }
@@ -91,9 +119,8 @@ function onDrag(e) {
   var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
   tt = SunCalc.getTimes(time, c.lat, c.lon);
 
-  console.log(tt.sunset);
-
-  console.log($(".date").width() , $(".date").position().left, $("document").width());
+  //console.log(tt.sunset);
+  //console.log($(".date").width() , $(".date").position().left, $("document").width());
 
   updateDate(w);
   curtod = new Date(tt.sunset);
@@ -151,19 +178,18 @@ function SketchRender() {
 
     var dx = p1.x - p0.x;
     var dy = p1.y - p0.y;
+
     dx *=0.15;
     dy *= 0.15;
-
-    if ((sunrisePos.altitude > 0.95*(Math.PI/2)) && (sunrisePos.altitude < 1.05*(Math.PI/2))){
-    }
 
     var lw = 0.4;
     var tolerance = 0.03;
 
     var r = Math.atan2(p1.y - p0.y, p1.x - p0.x) + 0.5*Math.PI;
     r = r < 0 ? r+Math.PI*2 : r;
-    // console.log(sunrisePos.azimuth, r)
+     //console.log(sunrisePos.azimuth, r)
     var d = Math.abs((r + Math.PI -  a) % (Math.PI*2) - Math.PI)
+
     // d = d < Math.PI ? d : d - Math.PI;
     if (d < tolerance*Math.PI){
       ctx.strokeStyle = "rgba(254, 217, 118)";
