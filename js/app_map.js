@@ -225,7 +225,7 @@ var primitive_render = this.primitive_render = {
 
 SketchRender.prototype = new VECNIK.Renderer();
 
-var d = new Date(2013,5,1); // start in 01 Jun 2013
+var d = new Date(2013,6,1); // start in 01 Jun 2013
 var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
 
 function initMap(options) {
