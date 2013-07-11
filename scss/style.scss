@@ -199,7 +199,7 @@ a.button:hover{
 
   .date {
     display:none;
-    @include position($sliderHeight/2 - 10, false, false, 100px);
+    @include position($sliderHeight/2 - 14, false, false, 100px);
     padding: 7px 8px;
     background: #0099EF;
     @include border-radius(3px);
@@ -230,9 +230,7 @@ a.button:hover{
 
 
     li {
-      /*background:red;*/
       height:$sliderHeight;
-      /*border-right: 1px solid red;*/
       width: 111px;
       padding-top: 30px;
       text-align:center;
@@ -242,6 +240,7 @@ a.button:hover{
       font-weight:bold;
       color:#fff;
       @include opacity(.5);
+      /*@include simple-transition(all, 100ms);*/
       text-transform: uppercase;
     }
   }

@@ -3,10 +3,8 @@ var tt, shader, tod, map, curtod, city;
 
 function adjustMonths(l) {
 
-  var ratio = 31 * l/365;
+  var ratio = Math.floor(31 * l/365);
   var monthPadding = 5;
-
-  console.log(ratio);
 
   for (var i = 0; i <= 11; i++) {
     var $li = $(".month_" + (i + monthPadding));
@@ -14,9 +12,10 @@ function adjustMonths(l) {
   }
 
 }
+
 function setupMonths() {
 
-  var ratio = 31 * $(document).width()/365;
+  var ratio = Math.floor(31 * $(document).width()/365);
   var monthPadding = 5;
 
   for (var i = 0; i <= 11; i++) {
@@ -27,7 +26,21 @@ function setupMonths() {
 
 }
 
+function getDayNumber() {
+  var now = new Date();
+  var start = new Date(now.getFullYear(), 0, 0);
+  var diff = now - start;
+  var oneDay = 1000 * 60 * 60 * 24;
+  return Math.floor(diff / oneDay);
+}
+
 $(function() {
+
+var d = getDayNumber();
+var ratio = 365/$(document).width();
+
+$(".highlight").css({ width: d * (1-ratio) });
+$(".handle").css({ left: d * (1-ratio) - 10 });
 
 setupMonths();
 
@@ -60,7 +73,7 @@ function updateDate(left) {
     $(".date").html(month + ", " + day + "<span class='suffix'>" + get_nth_suffix(day) + "</span>");
   }
 
-  $(".date").css({ left: left });
+  $(".date").css({ left: left - $(".date").width() / 2 });
 
 }
 
@@ -72,10 +85,10 @@ function onDrag(e) {
   $(".highlight").width(w + 10);
   var c = map.getCenter();
   var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
-  console.log(time);
   tt = SunCalc.getTimes(time, c.lat, c.lon);
 
-  console.log(tt.sunset);
+  //console.log(tt.sunset);
+  //console.log($(".date").width() , $(".date").position().left, $("document").width());
 
   updateDate(w);
   curtod = new Date(tt.sunset);
