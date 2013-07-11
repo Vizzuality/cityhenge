@@ -13,7 +13,6 @@ $( "#slider .handle" ).draggable({
   drag: onDrag
 });
 
-var vis = cartodb.createVis('mapContainer', 'http://viz2.cartodb.com/api/v1/viz/new_york_osm_line_clean/viz.json');
-vis.done(function(vis, layers) { });
-
+//var vis = cartodb.createVis('mapContainer', 'http://viz2.cartodb.com/api/v1/viz/new_york_osm_line_clean/viz.json');
+//vis.done(function(vis, layers) { });
 });
