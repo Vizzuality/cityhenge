@@ -188,6 +188,7 @@ a.button:hover{
 }
 
 #slider {
+
   $sliderHeight: 71px;
   position:relative;
 
@@ -225,6 +226,8 @@ a.button:hover{
   .months {
     @include position(0, false, false, 0);
     z-index: 10;
+    @extend .disable-selection;
+
 
     li {
       /*background:red;*/
