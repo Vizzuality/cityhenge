@@ -198,13 +198,13 @@ a.button:hover{
 
   .date {
     display:none;
+    @include position($sliderHeight/2 - 10, false, false, 100px);
     padding: 7px 8px;
     background: #0099EF;
     @include border-radius(3px);
     text-transform: uppercase;
     border: 1px solid #333;
     color:#fff;
-    @include position($sliderHeight/2 - 10, false, false, 100px);
     font-size: 11px;
     font-weight:bold;
     pointer-events:none;
@@ -247,14 +247,13 @@ a.button:hover{
     @include size(20px, $sliderHeight);
     top: 0px;
     left: 100px;
-    background: #0099EF;
     cursor: ew-resize;
     z-index: 100;
   }
 
   .highlight {
     background: #0099EF;
-    @include size(100px, $sliderHeight);
+    @include size(120px, $sliderHeight);
     position:absolute;
     top: 0px;
     left: 0;

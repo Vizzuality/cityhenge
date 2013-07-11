@@ -1,40 +1,58 @@
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var tt, shader, tod, map, curtod, city;
+
+function adjustMonths(l) {
+
+  var ratio = 31 * l/365;
+  var monthPadding = 5;
+
+  console.log(ratio);
+
+  for (var i = 0; i <= 11; i++) {
+    var $li = $(".month_" + (i + monthPadding));
+    $li.css({ width: ratio, left: i * ratio });
+  }
+
+}
+function setupMonths() {
+
+  var ratio = 31 * $(document).width()/365;
+  var monthPadding = 5;
+
+  for (var i = 0; i <= 11; i++) {
+    var $li = $("<li class='month_"+(i + monthPadding)+"'>" + months[(i + monthPadding) % 12] + "</li>");
+    $("#slider .months").append($li);
+    $li.css({ width: ratio, left: i * ratio });
+  }
+
+}
 
 $(function() {
 
-var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+setupMonths();
 
-  var ratio = 31 * $(document).width()/365;
-  console.log(ratio);
-
-  var j = 5;
-
-  for (var i = 0; i<=11; i++) {
-
-    var $li = $("<li class='month_"+(i + j)+"'>" + months[(i+j)%12] + "</li>");
-    $("#slider .months").append($li);
-    $li.css({ width: ratio, left: (i + 0) * ratio });
-  }
-
+$(window).resize(function(){
+  adjustMonths(document.body.clientWidth);
+});
 
 function updateDate(left) {
 
   function get_nth_suffix(date) {
-   switch (date) {
-     case 1:
-     case 21:
-     case 31:
-        return 'st';
-     case 2:
-     case 22:
-        return 'nd';
-     case 3:
-     case 23:
-        return 'rd';
-     default:
-        return 'th';
-   }
- }
+    switch (date) {
+      case 1:
+      case 21:
+      case 31:
+      return 'st';
+      case 2:
+      case 22:
+      return 'nd';
+      case 3:
+      case 23:
+      return 'rd';
+      default:
+      return 'th';
+    }
+  }
 
   if (tt) {
     var month = months[tt.sunset.getMonth()];
@@ -68,13 +86,16 @@ function onStart(e) {
   var w = $(e.target).position().left
 
   updateDate(w);
+
   $(".date").fadeIn(250);
 
 }
 
 function onStop(e) {
+  var w = $(e.target).position().left
 
   $(".date").fadeOut(250);
+  $(".highlight").width(w + 20);
 
   VECNIK.Carto.compile(
   "#world { line-width: 2; line-color: #000; [TYPEY='test']{ line-width: 2; } [ZOOM = 0]{ line-width: 2; } }", function(shaderData) {
