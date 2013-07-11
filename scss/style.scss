@@ -1,0 +1,94 @@
+@import "compass/reset";
+@import "compass/css3";
+@import "helpers";
+@import "breakpoint";
+
+/*@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700);*/
+
+$breakpoint-medium-width: max-width 700px;
+
+html, body { height:100%; width:100%; margin:0; }
+
+html {
+
+  background: url(../img/bkg.jpg) no-repeat center center fixed;
+
+  @include background-size(cover);
+
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.../img/bkg.jpg', sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bkg.jpg', sizingMethod='scale')";
+}
+
+body{
+  line-height:normal;
+
+  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  color:#333;
+  text-align:center;
+
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+
+  position:relative;
+
+}
+
+h1  {
+  font-size:117px;
+  color: #fff;
+  font-weight: bold;
+
+  @include simple-transition(font-size);
+
+  @include breakpoint($breakpoint-medium-width) {
+    font-size: 90px;
+  }
+}
+
+header {
+  margin: auto;
+
+  @include absolute-center(700px, 160px);
+  @include simple-transition(all);
+
+  @include breakpoint($breakpoint-medium-width) {
+    @include absolute-center(470px, 130px);
+  }
+}
+
+.content {
+
+  position:absolute;
+  bottom: 200px;
+  width: 100%;
+  text-align:center;
+
+  p {
+    width: 557px;
+    margin: 0 auto 40px auto;
+
+    font-size: 17px;
+    color:#fff;
+  }
+
+  .btn {
+    @include inline-block();
+    font-size: 17px;
+    color:#fff;
+    font-weight:bold;
+    text-decoration:none;
+    @include border-radius(8px);
+    @include simple-transition(all);
+
+    border: 3px solid rgba(#000, .3);
+    padding: 18px 24px;
+
+    &:hover {
+      background:#fff;
+      color:#333;
+
+    }
+
+  }
+
+}
