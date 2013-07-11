@@ -1,0 +1,86 @@
+html, body, #map {
+  width: 100%; height: 100%;
+  padding: 0;
+  margin: 0;
+  background:#333;
+}
+.button {
+  position: absolute;
+  left: 30px;
+  top: 400px;
+  background-color: #AAA;
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font: bold 16px Helvetica;
+}
+.tod {
+  position: absolute;
+  right: 30px;
+  top: 200px;
+  background-color: #AAA;
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  font: bold 16px Helvetica;
+}
+#livecode {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 450px;
+  padding-left: 10px;
+  box-shadow: 0px 0px 5px 6px #ccc;
+}
+textarea {
+  color: rgba(0,0,0,0.9);
+  background-color:rgba(255,255,255,0.7);
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  font-family: monospace;
+  font-size: 19px;
+  width: 450px;
+  border: 0;
+  outline: none;
+
+}
+          /* code */
+.highlight {
+  font-family: monospace;
+  font-size: 19px;
+}
+
+#tn {
+  position: absolute;
+  left: 30px;
+  bottom: 54px;
+  background-color: #AAA;
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
+  padding: 4px;
+  font: bold 16px Helvetica;
+  width: 160px;
+  height: 22px;
+}
+#user {
+  position: absolute;
+  left: 30px;
+  bottom: 14px;
+  background-color: #AAA;
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
+  padding: 4px;
+  font: bold 16px Helvetica;
+  width: 160px;
+  height: 22px;
+}
