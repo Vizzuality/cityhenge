@@ -26,7 +26,7 @@ function updateDate(left) {
   if (tt) {
     var month = months[tt.sunset.getMonth()];
     var day   = tt.sunset.getDate();
-    $(".date").html(month + ", " + day + get_nth_suffix(day));
+    $(".date").html(month + ", " + day + "<span class='suffix'>" + get_nth_suffix(day) + "</span>");
   }
 
   $(".date").css({ left: left });

@@ -209,6 +209,8 @@ a.button:hover{
     font-weight:bold;
     z-index: 30;
     pointer-events:none;
+
+    .suffix { text-transform: lowercase; }
   }
 
   .border {
