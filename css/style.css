@@ -518,3 +518,15 @@ body.map .credits, body.map .credits a {
   font-size: 12px;
   color: #fff;
 }
+
+.cartodb_logo {
+  display: none;
+  width: 69px;
+  height: 27px;
+  position: absolute;
+  bottom: 83px;
+  left: 15px;
+  background: url("http://cartodb.s3.amazonaws.com/embed/embed_sprite.png") no-repeat -61px 0;
+  text-indent: -9999px;
+  z-index: 10000;
+}

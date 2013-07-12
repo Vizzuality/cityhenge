@@ -354,3 +354,16 @@ body.map {
   @include position(false, 7px, 7px, false);
   &, a { font-size: 12px; color:#fff; }
 }
+
+.cartodb_logo {
+  display:none;
+
+  @include size(69px, 27px);
+  @include position(false, false, 83px, 15px);
+
+  background:url('http://cartodb.s3.amazonaws.com/embed/embed_sprite.png') no-repeat -61px 0;
+
+  text-indent:-9999px;
+  z-index: 10000;
+}
+
