@@ -171,6 +171,10 @@ a.button:hover{
     margin: 20px 0 0 30px;
     float: left;
 
+    @include breakpoint($breakpoint-medium-width) {
+      margin: 20px 0 0 15px;
+    }
+
     @include breakpoint($breakpoint-small-width) {
       span { display:none; }
     }
@@ -186,6 +190,10 @@ a.button:hover{
     float: right;
     margin: 25px 55px 0 0;
     @include clearfix();
+
+    @include breakpoint($breakpoint-medium-width) {
+      margin: 25px 15px 0 0;
+    }
 
     li {
 
