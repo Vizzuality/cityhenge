@@ -232,7 +232,26 @@ header {
   font-size: 17px;
   color: #fff;
 }
-.content .btn {
+
+.bottom {
+  display: block;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 190px;
+}
+
+h2 {
+  margin: 0 auto 50px auto;
+  font-size: 17px;
+  font-weight: normal;
+  color: #fff;
+  width: 550px;
+}
+
+.btn {
   margin: auto;
   display: -moz-inline-stack;
   display: inline-block;
@@ -262,37 +281,17 @@ header {
   border: 3px solid rgba(0, 0, 0, 0.3);
   padding: 18px 24px;
 }
-.content .btn:hover {
-  background: #fff;
-  color: #333;
-}
-
-.bottom {
-  display: block;
-  text-align: center;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 190px;
-}
-
-h2 {
-  margin: 0 auto 50px auto;
-  font-size: 17px;
-  font-weight: normal;
-  color: #fff;
-  width: 550px;
+.btn:hover {
+  border: 3px solid rgba(0, 0, 0, 0.5);
 }
 
 a.button, a.button:visited {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  width: 220px;
+  padding: 19px 46px 19px 46px;
   margin: auto;
   background: url(../img/button220.png) no-repeat 0 0;
-  padding: 19px 28px 19px 28px;
   font-size: 17px;
   font-weight: bold;
   text-decoration: none;

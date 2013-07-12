@@ -106,26 +106,6 @@ header {
     color:#fff;
   }
 
-  .btn {
-    margin: auto;
-    @include inline-block();
-    font-size: 17px;
-    color:#fff;
-    font-weight:bold;
-    text-decoration:none;
-    @include border-radius(8px);
-    @include simple-transition(all);
-
-    border: 3px solid rgba(#000, .3);
-    padding: 18px 24px;
-
-    &:hover {
-      background:#fff;
-      color:#333;
-
-    }
-
-  }
 
 }
 
@@ -147,12 +127,30 @@ h2{
   width: 550px;
 }
 
+.btn {
+  margin: auto;
+  @include inline-block();
+  font-size: 17px;
+  color:#fff;
+  font-weight:bold;
+  text-decoration:none;
+  @include border-radius(8px);
+  @include simple-transition(all);
+
+  border: 3px solid rgba(#000, .3);
+  padding: 18px 24px;
+
+  &:hover {
+  border: 3px solid rgba(#000, .5);
+  }
+
+}
+
 a.button, a.button:visited{
   @include box-sizing(border-box);
-  width: 220px;
+  padding: 19px 46px 19px 46px;
   margin:auto;
   background: url(../img/button220.png) no-repeat 0 0;
-  padding: 19px 28px 19px 28px;
   font-size: 17px;
   font-weight: bold;
   text-decoration: none;
