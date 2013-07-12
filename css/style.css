@@ -446,6 +446,7 @@ a.button:hover {
   top: 0;
   left: 0;
   cursor: ew-resize;
+  background: url(../img/handle.png) no-repeat 0px center;
   z-index: 100;
 }
 #slider .highlight {

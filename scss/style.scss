@@ -293,6 +293,7 @@ a.button:hover{
     @include size(20px, $sliderHeight);
     @include position(0, false, false, 0);
     cursor: ew-resize;
+    background: url(../img/handle.png) no-repeat 0px center;
     z-index: 100;
   }
 
