@@ -222,14 +222,15 @@ function onSliderClick(e) {
 
   var ratio = $(document).width()/365;
 
-  var w = e.screenX;
+  var w = e.clientX;
 
   var c = map.getCenter();
-  // 152 is June 1, which looks like the
-  var day = 152 + w/ratio;
-  if (day>365) day=day-365;
+
+  var day = 152 + w/ratio; // 152 is June 1
+
+  if (day > 365) day = day - 365;
+
   var time = curtod.setTime( day * 1000 * 60 * 60 * 24 );
-  // var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
 
   tt     = SunCalc.getTimes(time, c.lat, c.lon);
   curtod = new Date(tt.sunset);
