@@ -109,11 +109,12 @@ function updateDate(left) {
   }
 
   if (tt) {
-    var month = months2[tt.sunset.getMonth() ];
+    var month = months[tt.sunset.getMonth()];
 
     var cen = map.getCenter();
     var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
     var day   = tt.sunset.getDate();
+    
     $(".date").html(month + ", " + day + "<span class='suffix'>" + get_nth_suffix(day) + "</span>");
   }
 
@@ -189,7 +190,7 @@ function onDrag(e) {
   var c = map.getCenter();
   var day = 152 + w/ratio;
   if (day>365) day=day-365; 
-  
+
   var time = curtod.setTime( day * 1000 * 60 * 60 * 24 );
   // var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
   tt = SunCalc.getTimes(time, c.lat, c.lon);
