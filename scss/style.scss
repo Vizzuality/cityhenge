@@ -296,11 +296,11 @@ a.button:hover{
   z-index: 1000;
 }
 
-
-
 /* Zoom */
 
 #zoom {
+
+  display:none;
 
   $zoomWidth: 43px;
   $zoomHeight: 36px; // distance from the top of the canvas until the middle line
