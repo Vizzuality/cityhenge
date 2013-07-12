@@ -103,7 +103,7 @@ function moveHighlightToDate(date, animated) {
     date = new Date(2014, date.getMonth(), date.getDay());
   }
 
-  var width = (date - june)/1000/60/60/24*ratio;
+  var width = 10+ratio*(date - june)/3600000/24;
 
   if (animated) {
 
@@ -127,7 +127,7 @@ function moveHighlightToCurrentDay(animated) {
 
   var june = new Date(2013, 5, 1);
 
-  var width = (currentDayNumber - getDayNumber(june))*ratio;
+  var width = 10+(currentDayNumber - getDayNumber(june))*ratio;
 
   if (animated) {
 
