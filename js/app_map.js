@@ -66,7 +66,7 @@ function moveHighlightToCurrentDay(animated) {
 
   if (animated) {
 
-    $(".highlight").animate({ width: width }, { duration: 250, complete: function() {
+    $(".highlight").delay(500).animate({ width: width }, { easing: "easeOutQuad", duration: 250, complete: function() {
         $(".handle").css({ left: width - 10 });
     }});
 
@@ -80,8 +80,8 @@ function moveHighlightToCurrentDay(animated) {
 $(function() {
 
 // Start animations
-$("#header").delay(1000).animate({ opacity: 1, top: 0    }, 250);
-$("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, { duration: 250, complete: function() {
+$("#header").delay(1000).animate({ opacity: 1, top: 0    }, { easing: "easeOutQuad", duration: 250 });
+$("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, { easing: "easeOutQuad", duration: 250, complete: function() {
     moveHighlightToCurrentDay(true);
 }});
 
