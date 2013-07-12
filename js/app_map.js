@@ -1,5 +1,5 @@
 var months  = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-var months2 = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"];
+
 var canvas, context, tt, shader, tod, map, curtod, city;
 
 $(window).resize(function(){
@@ -332,7 +332,7 @@ function drawSunLine(x, y, azimuth, length) {
 
   var x1 = x + Math.cos(azimuth+(Math.PI/2)) * length;
   var y1 = y + Math.sin(azimuth+(Math.PI/2)) * length;
-  
+
   context.moveTo(x, y);
   context.lineTo(x1, y1);
 
