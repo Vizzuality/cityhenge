@@ -1081,7 +1081,6 @@ var MM = com.modestmaps = {
                     month = parseFloat(args[3]);
                     day = parseFloat(args[4]);
 
-                    console.log(month, day);
                 if (isNaN(zoom) || isNaN(lat) || isNaN(lon)) {
                     return false;
                 } else {
@@ -1147,7 +1146,6 @@ var MM = com.modestmaps = {
         update: function() {
             var hash = location.hash;
             if (hash === this.lastHash) {
-                // console.info("(no change)");
                 return;
             }
             var sansHash = hash.substr(1),
