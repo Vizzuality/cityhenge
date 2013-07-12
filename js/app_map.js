@@ -1,5 +1,8 @@
+hash = {};
+
+cDay = 0, cMonth = 0;
 var fullMonths  = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-var months  = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+var months      = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 var canvas, context, tt, shader, tod, map, curtod, city;
 
@@ -213,6 +216,7 @@ function onSliderClick(e) {
 
   drawSunLayer();
   updateDate(w - 10);
+  updateHash();
 
 }
 
@@ -236,6 +240,8 @@ function onDrag(e) {
   //console.log(w, curtod);
 
   drawSunLayer();
+
+
 }
 
 function onDragStart(e) {
@@ -255,6 +261,17 @@ function onDragStop(e) {
   $(".highlight").width(l + 10);
 
   updateMap();
+
+  updateHash();
+
+
+}
+
+function updateHash() {
+
+  cDay   = curtod.getDate();
+  cMonth = curtod.getMonth() + 1;
+  new MM.Hash(map)
 
 }
 
@@ -510,9 +527,12 @@ function initMap(options) {
   map = new MM.Map(document.getElementById('map'), [provider,  fg])
 
   if (!location.hash) {
+    var today = new Date();
+    cDay = today.getDate();
+    cMonth = today.getMonth() + 1;
     map.setCenterZoom(new MM.Location(city.y, city.x ), city.z);
   }
 
-  var hash = new MM.Hash(map);
+  hash = new MM.Hash(map);
 
 }

@@ -45,7 +45,7 @@ var MM = com.modestmaps = {
         // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
         // can't apply these directly to MM because Chrome needs window
         // to own webkitRequestAnimationFrame (for example)
-        // perhaps we should namespace an alias onto window instead? 
+        // perhaps we should namespace an alias onto window instead?
         // e.g. window.mmRequestAnimationFrame?
         return function(callback) {
             (window.requestAnimationFrame  ||
@@ -255,7 +255,7 @@ var MM = com.modestmaps = {
                    " @" + this.zoom.toFixed(3) + ")";
         },
         // Quickly generate a string representation of this coordinate to
-        // index it in hashes. 
+        // index it in hashes.
         toKey: function() {
             // We've tried to use efficient hash functions here before but we took
             // them out. Contributions welcome but watch out for collisions when the
@@ -1072,7 +1072,7 @@ var MM = com.modestmaps = {
 
         parseHash: function(hash) {
             var args = hash.split("/");
-            if (args.length == 3) {
+            if (args.length == 5) {
                 var zoom = parseInt(args[0], 10),
                     lat = parseFloat(args[1]),
                     lon = parseFloat(args[2]);
@@ -1091,11 +1091,12 @@ var MM = com.modestmaps = {
 
         formatHash: function(map) {
             var center = map.getCenter(),
-                zoom = map.getZoom(),
+                zoom   = map.getZoom(),
                 precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
             return "#" + [zoom,
                 center.lat.toFixed(precision),
-                center.lon.toFixed(precision)
+                center.lon.toFixed(precision),
+                cDay,cMonth
             ].join("/");
         },
 
