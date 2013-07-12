@@ -155,7 +155,11 @@ function onSliderClick(e) {
   var w = e.screenX;
 
   var c = map.getCenter();
-  var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
+  // 152 is June 1, which looks like the 
+  var day = 152 + w/ratio;
+  if (day>365) day=day-365; 
+  var time = curtod.setTime( day * 1000 * 60 * 60 * 24 );
+  // var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
 
   tt     = SunCalc.getTimes(time, c.lat, c.lon);
   curtod = new Date(tt.sunset);
@@ -183,7 +187,11 @@ function onDrag(e) {
   var w = $(e.target).position().left
   $(".highlight").width(w + 10);
   var c = map.getCenter();
-  var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
+  var day = 152 + w/ratio;
+  if (day>365) day=day-365; 
+  
+  var time = curtod.setTime( day * 1000 * 60 * 60 * 24 );
+  // var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
   tt = SunCalc.getTimes(time, c.lat, c.lon);
 
   updateDate(w);
