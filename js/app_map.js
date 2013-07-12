@@ -108,14 +108,14 @@ function moveHighlightToDate(date, animated) {
   if (animated) {
 
     $(".highlight").delay(500).animate({ width: width }, { easing: "easeOutQuad", duration: 250, complete: function() {
-        $(".handle").css({ left: width - 10 });
-        $(".tip").css({ left: width - 10 });
+      $(".handle").css({ left: width - 10 });
+      $(".tip").css({ left: width });
     }});
 
     } else {
-    $(".highlight").css({ width: width });
-    $(".handle").css({ left: width - 10 });
-    $(".tip").css({ left: width - 10 });
+      $(".highlight").css({ width: width });
+      $(".handle").css({ left: width - 10 });
+      $(".tip").css({ left: width });
   }
 
 }
@@ -132,14 +132,14 @@ function moveHighlightToCurrentDay(animated) {
   if (animated) {
 
     $(".highlight").delay(500).animate({ width: width }, { easing: "easeOutQuad", duration: 250, complete: function() {
-        $(".handle").css({ left: width - 10 });
-        $(".tip").css({ left: width - 10 });
+      $(".handle").css({ left: width - 10 });
+      $(".tip").css({ left: width });
     }});
 
-    } else {
+  } else {
     $(".highlight").css({ width: width });
     $(".handle").css({ left: width - 10 });
-    $(".tip").css({ left: width - 10 });
+    $(".tip").css({ left: width });
   }
 
 }
@@ -196,6 +196,7 @@ function updateDate(left) {
     $(".date").css({ left: $(window).width() - 80 });
   } else {
     $(".date").css({ left: left - $(".date").width() / 2 });
+    $(".tip").css({ left: left + 10});
   }
 
 
