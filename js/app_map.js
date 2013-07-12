@@ -150,8 +150,6 @@ function onSliderClick(e) {
   var cen = map.getCenter();
   var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
 
-  updateDate(w - 10);
-
   $(".handle").css({ left: w - 10 });
   $(".highlight").animate({ width: w + "px"}, 150);
 
@@ -161,6 +159,7 @@ function onSliderClick(e) {
   });
 
   drawSunLayer();
+  updateDate(w - 10);
 
 }
 
