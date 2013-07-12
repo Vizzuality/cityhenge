@@ -155,7 +155,11 @@ function onSliderClick(e) {
   var w = e.screenX;
 
   var c = map.getCenter();
-  var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
+  // 152 is June 1, which looks like the 
+  var day = 152 + (365 * w/ratio) 
+  day = day ? day <= 365 : day - 365;
+  var time = curtod.setTime( day * 1000 * 60 * 60 * 24 );
+  // var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
 
   tt     = SunCalc.getTimes(time, c.lat, c.lon);
   curtod = new Date(tt.sunset);
