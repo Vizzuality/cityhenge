@@ -82,10 +82,14 @@ $(function() {
 // Start animations
 $("#header").delay(1000).animate({ opacity: 1, top: 0    }, { easing: "easeOutQuad", duration: 250 });
 $("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, { easing: "easeOutQuad", duration: 250, complete: function() {
+
     moveHighlightToCurrentDay(true);
+    setupMonths();
+    setupSunLayerCanvas();
+    drawSunLayer();
+
 }});
 
-setupMonths();
 
 $("#slider").on("click", onSliderClick);
 
@@ -114,7 +118,7 @@ function updateDate(left) {
     var cen = map.getCenter();
     var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
     var day   = tt.sunset.getDate();
-    
+
     $(".date").html(month + ", " + day + "<span class='suffix'>" + get_nth_suffix(day) + "</span>");
   }
 
@@ -156,9 +160,9 @@ function onSliderClick(e) {
   var w = e.screenX;
 
   var c = map.getCenter();
-  // 152 is June 1, which looks like the 
+  // 152 is June 1, which looks like the
   var day = 152 + w/ratio;
-  if (day>365) day=day-365; 
+  if (day>365) day=day-365;
   var time = curtod.setTime( day * 1000 * 60 * 60 * 24 );
   // var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
 
@@ -189,7 +193,7 @@ function onDrag(e) {
   $(".highlight").width(w + 10);
   var c = map.getCenter();
   var day = 152 + w/ratio;
-  if (day>365) day=day-365; 
+  if (day>365) day=day-365;
 
   var time = curtod.setTime( day * 1000 * 60 * 60 * 24 );
   // var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
@@ -478,8 +482,5 @@ function initMap(options) {
   if (!location.hash) {
     map.setCenterZoom(new MM.Location(city.y, city.x ), city.z);
   }
-
-  setupSunLayerCanvas();
-  drawSunLayer();
 
 }
