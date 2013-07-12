@@ -351,6 +351,11 @@ a.button:hover {
   margin: 0 0 0 30px;
   text-decoration: none;
 }
+@media (max-width: 800px) {
+  #header ul li a {
+    font-size: 14px;
+  }
+}
 #header ul li a:hover {
   text-decoration: underline;
 }

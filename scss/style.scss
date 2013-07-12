@@ -198,6 +198,10 @@ a.button:hover{
         margin: 0 0 0 30px;
         text-decoration:none;
 
+    @include breakpoint($breakpoint-big-width) {
+      font-size: 14px;
+    }
+
         &:hover {
           text-decoration:underline;
         }
