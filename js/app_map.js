@@ -513,4 +513,6 @@ function initMap(options) {
     map.setCenterZoom(new MM.Location(city.y, city.x ), city.z);
   }
 
+  var hash = new MM.Hash(map);
+
 }
