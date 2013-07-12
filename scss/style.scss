@@ -205,6 +205,8 @@ a.button:hover{
   background-color: #111;
 
   .date {
+    min-width: 60px;
+    text-align:center;
     display:none;
     @include position($sliderHeight/2 - 14, false, false, 100px);
     padding: 7px 8px;

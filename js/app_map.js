@@ -99,7 +99,17 @@ function updateDate(left) {
     $(".date").html(month + ", " + day + "<span class='suffix'>" + get_nth_suffix(day) + "</span>");
   }
 
-  $(".date").css({ left: left - $(".date").width() / 2 });
+
+
+  var handlePos = $(".handle").position().left + $(".handle").width();
+  var rightLimit = $(window).width() - handlePos;
+
+  if (rightLimit <= 60) {
+    $(".date").css({ left: $(window).width() - 65 });
+  } else {
+    $(".date").css({ left: left - $(".date").width() / 2 });
+  }
+
 
 }
 
@@ -156,7 +166,6 @@ function onDrag(e) {
   var c = map.getCenter();
   var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
   tt = SunCalc.getTimes(time, c.lat, c.lon);
-
 
   updateDate(w);
   curtod = new Date(tt.sunset);
