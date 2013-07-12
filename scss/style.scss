@@ -376,15 +376,16 @@ body.map {
 
 
 .embedWindow {
-  @include box-sizing(border-box);
   display:none;
-  @include absolute-center(480px, 220px);
-  background:#fff;
-  @include border-radius(3px);
-  z-index: 10000;
-  padding: 20px;
+  padding: 21px 25px 20px 25px;
 
+  @include box-sizing(border-box);
+  @include absolute-center(480px, 230px);
+  @include border-radius(3px);
   text-align: left;
+  background:#fff;
+
+  z-index: 10000;
 
   h3 {
     margin: 0;
@@ -393,12 +394,13 @@ body.map {
 
   .close {
     margin: auto;
-    text-decoration:none;
+    padding: 7px 14px;
+    float:right;
     background: #333;
     color: #fff;
     @include border-radius(2px);
-    padding: 5px 10px;
     font-size: 12px;
+    text-decoration:none;
 
     &:hover {
       text-decoration:underline;
@@ -406,10 +408,10 @@ body.map {
   }
 
   .code {
+    width: 407px;
     margin: 10px 0 10px 0;
-    color: #666;
     padding: 10px;
-    width: 418px;
+    color: #666;
     height: 100px;
     font-size: 14px;
   }
