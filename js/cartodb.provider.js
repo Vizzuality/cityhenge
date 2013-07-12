@@ -8,7 +8,7 @@
   function CartoDBSQLAPI(opts) {
       this.projection = new VECNIK.MercatorProjection();
       this.opts = opts;
-      this.base_url = 'http://' + opts.user + ".cartodb.com/api/v2/sql";
+      this.base_url = 'http://1.tiles.cartocdn.com/' + opts.user + "/api/v2/sql";
 
       //set defaults
       this.opts.ENABLE_SIMPLIFY = VECNIK.settings.get('ENABLE_SIMPLIFY');
