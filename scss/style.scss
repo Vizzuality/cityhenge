@@ -3,20 +3,45 @@
 @import "helpers";
 @import "breakpoint";
 
-/*@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700);*/
-
 $breakpoint-medium-width: max-width 700px;
+
+@-webkit-keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes fadeIn {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
 
 html, body { height:100%; width:100%; margin:0; }
 
 body{
   background: #000;
 
-  &.home {
+  .cover {
+    @include position(0,0,0,0);
+    @include size(100%);
+
     background: url(../img/bkg.jpg) no-repeat center center fixed;
     @include background-size(cover);
+
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.../img/bkg.jpg', sizingMethod='scale');
     -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bkg.jpg', sizingMethod='scale')";
+
+    -webkit-animation: fadeIn 5s; /* Safari 4+ */
+    -moz-animation:    fadeIn 5s; /* Fx 5+ */
+    -o-animation:      fadeIn 5s; /* Opera 12+ */
+    animation:         fadeIn 5s; /* IE 10+ */
+
   }
 
   line-height:normal;
@@ -30,7 +55,7 @@ body{
 
 }
 
-h1  {
+h1 a {
   font-size:117px;
   color: #fff;
   font-weight: bold;
@@ -45,6 +70,7 @@ h1  {
   color: white;
   background: url(../img/masked_circle.png) no-repeat center center;
   line-height: 300px;
+  text-decoration:none;
 
 
   @include breakpoint($breakpoint-medium-width) {
@@ -122,6 +148,8 @@ h2{
 }
 
 a.button, a.button:visited{
+  @include box-sizing(border-box);
+  width: 220px;
   margin:auto;
   background: url(../img/button220.png) no-repeat 0 0;
   padding: 19px 28px 19px 28px;
@@ -139,65 +167,79 @@ a.button:hover{
 /*MAP*/
 
 #header{
+  @include opacity(0);
   display: block;
   position: absolute;
-  top: 0;
+  top: -71px;
   width: 100%;
   height: 71px;
   background-color: #111;
   border-bottom: 1px solid rgba(255,255,255,0.2);
+  z-index: 10000;
+
+  a{
+    display: block;
+    color: #fff;
+    font-weight: bold;
+    font-size: 25px;
+    letter-spacing: 0;
+    text-decoration: none;
+    margin: 20px 0 0 30px;
+    float: left;
+  }
+
+  ul {
+    float: right;
+    margin: 25px 55px 0 0;
+
+    li {
+
+      &.about { margin-right: 10px; }
+      &.facebook { margin-left: -20px; }
+
+      display: inline;
+      margin-left: 5px;
+
+      a {
+        font-weight: normal;
+        font-size: 17px;
+        letter-spacing: 0px;
+        margin: 0 0 0 30px;
+        text-decoration:none;
+
+        &:hover {
+          text-decoration:underline;
+        }
+
+      }
+    }
+  }
 }
 
-#header a{
-  display: block;
-  color: #fff;
-  font-weight: bold;
-  font-size: 25px;
-  letter-spacing: 0;
-  text-decoration: none;
-  margin: 20px 0 0 30px;
-  float: left;
-}
-
-#header ul {
-  float: right;
-  margin: 25px 30px 0 0;
-}
-
-#header ul li{
-  display: inline;
-}
-
-#header ul li a{
-  font-weight: normal;
-  font-size: 17px;
-  letter-spacing: 0px;
-  margin: 0 0 0 30px;
-}
-
-#header ul li a.selected{
-  color: rgba(255,255,255,0.5);
-}
 
 #map{
   width: 100%; height: 100%;
   padding: 0;
   margin: 0;
-  @include position(72px, 0, 72px, 0);
+  @include position(0, 0, 0, 0);
 }
 
 #slider {
+
+  @include opacity(0);
 
   $sliderHeight: 71px;
   position:relative;
   z-index: 100000;
 
   display: block;
-  @include position(false, false, 0, 0);
+  @include position(false, false, -$sliderHeight, 0);
   @include size(100%, $sliderHeight);
   background-color: #111;
 
   .date {
+    min-width: 60px;
+    text-align:center;
     display:none;
     @include position($sliderHeight/2 - 14, false, false, 100px);
     padding: 7px 8px;
@@ -230,6 +272,7 @@ a.button:hover{
 
 
     li {
+      @include box-sizing(border-box);
       height:$sliderHeight;
       width: 111px;
       padding-top: 30px;
@@ -240,7 +283,6 @@ a.button:hover{
       font-weight:bold;
       color:#fff;
       @include opacity(.5);
-      /*@include simple-transition(all, 100ms);*/
       text-transform: uppercase;
       cursor: pointer;
     }
@@ -248,18 +290,15 @@ a.button:hover{
 
   .handle {
     @include size(20px, $sliderHeight);
-    top: 0px;
-    left: 110px;
+    @include position(0, false, false, 0);
     cursor: ew-resize;
     z-index: 100;
   }
 
   .highlight {
+    @include size(0, $sliderHeight);
+    @include position(0, false, false, 0);
     background: #0099EF;
-    @include size(120px, $sliderHeight);
-    position:absolute;
-    top: 0px;
-    left: 0;
     z-index: 1;
   }
 }
@@ -269,3 +308,61 @@ a.button:hover{
   position:absolute;
   z-index: 1000;
 }
+
+
+
+/* Zoom */
+
+#zoom {
+
+  $zoomWidth: 43px;
+  $zoomHeight: 36px; // distance from the top of the canvas until the middle line
+
+  @include position(90px, false, false, 20px);
+
+  $url: "../img/map-zoom.png";
+
+  z-index: 1000;
+
+  .zoom_in,
+  .zoom_out { display:block; position:relative; width: $zoomWidth; height: $zoomHeight; cursor: pointer; }
+
+  .zoom_in {
+    background: transparent url($url) no-repeat 0 0;
+    &:hover  { background: transparent url($url) no-repeat -1*$zoomWidth 0; }
+    &:active { background: transparent url($url) no-repeat -2*$zoomWidth 0; }
+  }
+
+  .zoom_out {
+    background: transparent url($url) no-repeat 0 -1*$zoomHeight;
+    &:hover  { background: transparent url($url) no-repeat -1*$zoomWidth -1*$zoomHeight; }
+    &:active { background: transparent url($url) no-repeat -2*$zoomWidth -1*$zoomHeight; }
+  }
+}
+
+
+body.map {
+  .credits {
+    @include position(false, 10px, 83px, false);
+    &, a { font-size: 12px; color:#fff; }
+    z-index: 10000;
+  }
+}
+.credits {
+  display:none;
+  @include position(false, 7px, 7px, false);
+  &, a { font-size: 12px; color:#fff; }
+}
+
+.cartodb_logo {
+  display:none;
+
+  @include size(69px, 27px);
+  @include position(false, false, 83px, 15px);
+
+  background:url('http://cartodb.s3.amazonaws.com/embed/embed_sprite.png') no-repeat -61px 0;
+
+  text-indent:-9999px;
+  z-index: 10000;
+}
+
