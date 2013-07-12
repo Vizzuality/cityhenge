@@ -146,6 +146,7 @@ function moveHighlightToCurrentDay(animated) {
 
 $(function() {
 
+  if (($.browser.msie) && ($.browser.version < 9)) window.location.href = "/old.html";
 
 $("#slider").on("click", onSliderClick);
 
@@ -269,12 +270,11 @@ function onDrag(e) {
   curtod = new Date(tt.sunset);
   drawSunLayer();
 
-
 }
 
 function onDragStart(e) {
 
-  $(".tip").delay(2000).fadeOut(250);
+  $(".tip").delay(1000).fadeOut(250);
 
   var l = $(e.target).position().left
 
@@ -618,6 +618,7 @@ $("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, { easing: "easeOutQu
     setupSunLayerCanvas();
     drawSunLayer();
     $(".credits, .cartodb_logo, #zoom").fadeIn(250);
+    $(".tip").delay(1500).fadeIn(250);
 
 
 }});
