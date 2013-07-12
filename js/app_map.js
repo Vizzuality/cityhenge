@@ -262,21 +262,21 @@ function SketchRender() {
 
     // d = d < Math.PI ? d : d - Math.PI;
     if (d < tolerance*Math.PI){
-      ctx.strokeStyle = "rgba(254, 217, 118)";
-      } else if (d < (tolerance * 1.2)*Math.PI){
-      ctx.strokeStyle = "rgba(253, 141, 60)";
+      ctx.strokeStyle = "rgba(254, 118, 66)";
+    } else if (d < (tolerance * 1.2)*Math.PI){
+      ctx.strokeStyle = "rgba(234, 98, 54 ,0.8)";
       lw = 2
-      } else if (d < (tolerance * 1.4)*Math.PI){
-      ctx.strokeStyle = "rgba(252, 78, 42, 0.9)";
+    } else if (d < (tolerance * 1.4)*Math.PI){
+      ctx.strokeStyle = "rgba(201, 85, 43,0.6)";
       lw = 1.8
-      } else if (d < (tolerance * 1.6)*Math.PI){
-      ctx.strokeStyle = "rgba(189, 0, 38, 0.9)";
+    } else if (d < (tolerance * 1.6)*Math.PI){
+      ctx.strokeStyle = "rgba(183, 72, 37,0.4)";
       lw = 1.2
-      } else if (d < (tolerance * 1.8)*Math.PI){
-      ctx.strokeStyle = "rgba(128, 0, 38)";
+    } else if (d < (tolerance * 1.8)*Math.PI){
+      ctx.strokeStyle = "rgba(162, 63, 31,0.2)";
       lw = .8
-      } else {
-      ctx.strokeStyle = "rgba(0,0,0, 1)";
+    } else {
+      ctx.strokeStyle = "rgba(33, 33, 33,0.5)";
       lw = 0.4;
     }
     // }
