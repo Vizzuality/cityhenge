@@ -103,7 +103,7 @@ function moveHighlightToDate(date, animated) {
     date = new Date(2014, date.getMonth(), date.getDay());
   }
 
-  var width = (date - june)/1000/60/60/24*ratio;
+  var width = 10+ratio*(date - june)/3600000/24;
 
   if (animated) {
 
