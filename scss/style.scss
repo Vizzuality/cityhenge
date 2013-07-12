@@ -3,7 +3,8 @@
 @import "helpers";
 @import "breakpoint";
 
-$breakpoint-medium-width: max-width 700px;
+$breakpoint-small-width: max-width 630px;
+$breakpoint-medium-width: max-width 760px;
 $breakpoint-big-width: max-width 1000px;
 
 @-webkit-keyframes fadeIn {
@@ -170,8 +171,12 @@ a.button:hover{
     margin: 20px 0 0 30px;
     float: left;
 
+    @include breakpoint($breakpoint-small-width) {
+      span { display:none; }
+    }
+
     @include breakpoint($breakpoint-big-width) {
-      margin: 25px 0 0 30px;
+      margin: 23px 0 0 30px;
       font-size: 18px;
     }
 
@@ -186,7 +191,22 @@ a.button:hover{
 
       float:left;
 
-      &.about { margin-right: 10px; }
+      &.about.small,
+      &.embed.small {
+        display:none;
+        @include breakpoint($breakpoint-medium-width) { display:block; }
+
+      }
+
+      &.embed {
+        @include breakpoint($breakpoint-medium-width) { display:none; }
+      }
+
+      &.about {
+        margin-right: 10px;
+        @include breakpoint($breakpoint-medium-width) { display:none; }
+      }
+
       &.facebook { margin-left: -20px; }
       &.twitter { margin-left: 10px; }
 
@@ -201,6 +221,7 @@ a.button:hover{
 
         @include breakpoint($breakpoint-big-width) {
           font-size: 14px;
+          margin-left: 10px;
           margin-top: 3px;
         }
 

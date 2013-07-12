@@ -417,7 +417,6 @@ function drawSunLine(x, y, azimuth, length) {
   context.lineTo(x1, y1);
 
   context.globalAlpha = 0.4;
-  context.restore();
 
   context.lineWidth = 1;
   context.strokeStyle = '#fff';
@@ -438,6 +437,7 @@ function drawSun(x, y, azimuth, length) {
   var y1 = y + Math.sin(azimuth+(Math.PI/2)) * length;
 
   context.beginPath();
+  context.globalAlpha = 0.9;
   context.arc(x1, y1, 15, 0, 2 * Math.PI, false);
   context.fillStyle = '#fff';
   context.fill();
@@ -461,7 +461,6 @@ function drawSunPath(x, y, radius) {
   context.lineWidth = 30;
   context.strokeStyle = '#fff';
   context.stroke();
-  context.restore();
 
 }
 
