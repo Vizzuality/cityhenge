@@ -1,3 +1,4 @@
+var fullMonths  = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var months  = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 var canvas, context, tt, shader, tod, map, curtod, city;
@@ -100,41 +101,59 @@ $("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, { easing: "easeOutQu
     drawSunLayer();
     $(".credits, .cartodb_logo").fadeIn(250);
 
+    getTodayDate();
+
 }});
 
 
 $("#slider").on("click", onSliderClick);
 
+function get_nth_suffix(date) {
+  switch (date) {
+    case 1:
+    case 21:
+    case 31:
+      return 'st';
+    case 2:
+    case 22:
+      return 'nd';
+    case 3:
+    case 23:
+      return 'rd';
+    default:
+      return 'th';
+  }
+}
+
+function getTodayDate() {
+
+  var today     = new Date();
+  var fullMonth = fullMonths[today.getMonth()];
+  var day       = today.getDate();
+
+  $("#header a span").html("on " + fullMonth + " " + day + get_nth_suffix(day) );
+
+}
+
+function updateDateSpans() {
+
+  var month     = months[tt.sunset.getMonth()];
+  var fullMonth = fullMonths[tt.sunset.getMonth()];
+
+  var cen = map.getCenter();
+  var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
+  var day   = tt.sunset.getDate();
+
+  $(".date").html(month + ", " + day + "<span class='suffix'>" + get_nth_suffix(day) + "</span>");
+  $("#header a span").html("on " + fullMonth + " " + day + get_nth_suffix(day) );
+
+}
+
 function updateDate(left) {
 
-  function get_nth_suffix(date) {
-    switch (date) {
-      case 1:
-      case 21:
-      case 31:
-      return 'st';
-      case 2:
-      case 22:
-      return 'nd';
-      case 3:
-      case 23:
-      return 'rd';
-      default:
-      return 'th';
-    }
-  }
-
   if (tt) {
-    var month = months[tt.sunset.getMonth()];
-
-    var cen = map.getCenter();
-    var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
-    var day   = tt.sunset.getDate();
-
-    $(".date").html(month + ", " + day + "<span class='suffix'>" + get_nth_suffix(day) + "</span>");
+    updateDateSpans();
   }
-
-
 
   var handlePos = $(".handle").position().left + $(".handle").width();
   var rightLimit = $(window).width() - handlePos;
