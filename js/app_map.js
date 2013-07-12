@@ -109,11 +109,13 @@ function moveHighlightToDate(date, animated) {
 
     $(".highlight").delay(500).animate({ width: width }, { easing: "easeOutQuad", duration: 250, complete: function() {
         $(".handle").css({ left: width - 10 });
+        $(".tip").css({ left: width - 10 });
     }});
 
     } else {
     $(".highlight").css({ width: width });
     $(".handle").css({ left: width - 10 });
+    $(".tip").css({ left: width - 10 });
   }
 
 }
@@ -131,11 +133,13 @@ function moveHighlightToCurrentDay(animated) {
 
     $(".highlight").delay(500).animate({ width: width }, { easing: "easeOutQuad", duration: 250, complete: function() {
         $(".handle").css({ left: width - 10 });
+        $(".tip").css({ left: width - 10 });
     }});
 
     } else {
     $(".highlight").css({ width: width });
     $(".handle").css({ left: width - 10 });
+    $(".tip").css({ left: width - 10 });
   }
 
 }
@@ -268,6 +272,8 @@ function onDrag(e) {
 }
 
 function onDragStart(e) {
+
+  $(".tip").delay(2000).fadeOut(250);
 
   var l = $(e.target).position().left
 
