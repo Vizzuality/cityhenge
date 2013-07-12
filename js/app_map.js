@@ -71,6 +71,10 @@ function moveHighlightToCurrentDay() {
 
 $(function() {
 
+// Start animations
+$("#header").delay(1000).animate({ opacity: 1, top: 0    }, 250);
+$("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, 250);
+
 setupMonths();
 moveHighlightToCurrentDay();
 

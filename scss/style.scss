@@ -143,9 +143,10 @@ a.button:hover{
 /*MAP*/
 
 #header{
+  @include opacity(0);
   display: block;
   position: absolute;
-  top: 0;
+  top: -71px;
   width: 100%;
   height: 71px;
   background-color: #111;
@@ -195,12 +196,14 @@ a.button:hover{
 
 #slider {
 
+  @include opacity(0);
+
   $sliderHeight: 71px;
   position:relative;
   z-index: 100000;
 
   display: block;
-  @include position(false, false, 0, 0);
+  @include position(false, false, -$sliderHeight, 0);
   @include size(100%, $sliderHeight);
   background-color: #111;
 
