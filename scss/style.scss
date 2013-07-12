@@ -399,13 +399,17 @@ body.map {
     @include border-radius(2px);
     padding: 5px 10px;
     font-size: 12px;
+
+    &:hover {
+      text-decoration:underline;
+    }
   }
 
   .code {
     margin: 10px 0 10px 0;
     color: #666;
     padding: 10px;
-    width: 400px;
+    width: 418px;
     height: 100px;
     font-size: 14px;
   }
