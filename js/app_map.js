@@ -318,7 +318,7 @@ function drawSunLayer() {
 
   var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
   var a = sunrisePos.azimuth;
-  var r = 300;
+  var r = 250;
 
   drawSunLayerLine(p1.x, p1.y, a, r);
   drawSun(p1.x, p1.y, a, r);
