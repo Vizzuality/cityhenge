@@ -71,3 +71,9 @@ h2 {
 }
 
 
+
+.credits {
+  @include position(false, 7px, 7px, false);
+  &, a { font-size: 12px; color:#fff; }
+}
+

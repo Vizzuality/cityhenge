@@ -170,3 +170,13 @@ h2 {
 .btn:hover {
   border: 3px solid rgba(0, 0, 0, 0.5);
 }
+
+.credits {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+}
+.credits, .credits a {
+  font-size: 12px;
+  color: #fff;
+}
