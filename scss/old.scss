@@ -1,0 +1,73 @@
+@import "compass/reset";
+@import "compass/css3";
+@import "helpers";
+@import "breakpoint";
+
+html, body { height:100%; width:100%; margin:0; }
+
+body{
+  background: #000;
+
+  .cover {
+    @include position(0,0,0,0);
+    @include size(100%);
+
+    background: url(../img/bkg_old.jpg) no-repeat center center fixed;
+    @include background-size(cover);
+
+  }
+
+  line-height:normal;
+
+  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  color:#333;
+
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+
+}
+
+h1 {
+  font-size:30px;
+  color: #fff;
+  font-weight: bold;
+  text-align:center;
+  font-weight: bold;
+  color: white;
+}
+
+.bottom{
+  display: block;
+  text-align:center;
+  @include absolute-center(600px, 100px);
+}
+
+h2 {
+  margin: 0 auto 40px auto;
+  font-size: 17px;
+  font-weight: normal;
+  color: #fff;
+  width: 550px;
+}
+
+.btn {
+  margin: auto;
+  @include inline-block();
+  @include border-radius(8px);
+  @include simple-transition(all);
+
+  font-size: 17px;
+  color:#fff;
+  font-weight:bold;
+  text-decoration:none;
+
+  border: 3px solid rgba(#000, .3);
+  padding: 15px 30px;
+
+  &:hover {
+    border: 3px solid rgba(#000, .5);
+  }
+
+}
+
+

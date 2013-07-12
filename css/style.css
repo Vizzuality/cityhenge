@@ -312,8 +312,9 @@ a.button:hover {
   margin: 20px 0 0 30px;
   float: left;
 }
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   #header a {
+    margin: 25px 0 0 30px;
     font-size: 18px;
   }
 }
@@ -351,9 +352,10 @@ a.button:hover {
   margin: 0 0 0 30px;
   text-decoration: none;
 }
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
   #header ul li a {
     font-size: 14px;
+    margin-top: 5px;
   }
 }
 #header ul li a:hover {
@@ -450,6 +452,7 @@ a.button:hover {
 }
 #slider .tip {
   background: url(../img/arrow.png) no-repeat 0 3px;
+  text-shadow: 0 0 10px black;
   padding-left: 20px;
   position: absolute;
   bottom: 80px;
