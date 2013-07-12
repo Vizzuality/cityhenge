@@ -1,5 +1,8 @@
+hash = {};
+
+cDay = 0, cMonth = 0;
 var fullMonths  = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-var months  = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+var months      = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 var canvas, context, tt, shader, tod, map, curtod, city;
 
@@ -70,11 +73,11 @@ function getCurrentDayNumber() {
 function moveHighlightToCurrentDay(animated) {
 
   var currentDayNumber = getCurrentDayNumber();
-  var ratio = Math.floor($(window).width()/365);
+  var ratio = $(window).width()/365;
 
   var june = new Date(2013, 5, 1);
 
-  var width = currentDayNumber*ratio - getDayNumber(june)*ratio;
+  var width = (currentDayNumber - getDayNumber(june))*ratio;
 
   if (animated) {
 
@@ -99,7 +102,7 @@ $("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, { easing: "easeOutQu
     setupMonths();
     setupSunLayerCanvas();
     drawSunLayer();
-    $(".credits, .cartodb_logo").fadeIn(250);
+    $(".credits, .cartodb_logo, #zoom").fadeIn(250);
 
     getTodayDate();
 
@@ -213,6 +216,7 @@ function onSliderClick(e) {
 
   drawSunLayer();
   updateDate(w - 10);
+  updateHash();
 
 }
 
@@ -231,9 +235,13 @@ function onDrag(e) {
   tt = SunCalc.getTimes(time, c.lat, c.lon);
 
   updateDate(w);
+
   curtod = new Date(tt.sunset);
+  //console.log(w, curtod);
 
   drawSunLayer();
+
+
 }
 
 function onDragStart(e) {
@@ -253,6 +261,17 @@ function onDragStop(e) {
   $(".highlight").width(l + 10);
 
   updateMap();
+
+  updateHash();
+
+
+}
+
+function updateHash() {
+
+  cDay   = curtod.getDate();
+  cMonth = curtod.getMonth() + 1;
+  new MM.Hash(map)
 
 }
 
@@ -508,7 +527,12 @@ function initMap(options) {
   map = new MM.Map(document.getElementById('map'), [provider,  fg])
 
   if (!location.hash) {
+    var today = new Date();
+    cDay = today.getDate();
+    cMonth = today.getMonth() + 1;
     map.setCenterZoom(new MM.Location(city.y, city.x ), city.z);
   }
+
+  hash = new MM.Hash(map);
 
 }
