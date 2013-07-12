@@ -268,13 +268,21 @@ var primitive_render = this.primitive_render = {
 }
 
 
-function drawSunLayerLine(x, y, angle, length) {
+function drawSunLayerLine(x, y, azimuth, length) {
 
-  // Line
   context.beginPath();
   context.moveTo(x, y);
 
-  context.lineTo(x + Math.cos(angle*180/Math.PI)*length, y + Math.sin(angle*180/Math.PI)*length);
+  var angle = azimuth*180 / Math.PI;
+
+  var x1 = x + Math.cos(angle) * length;
+  var y1 = y + Math.sin(angle) * length;
+
+  console.log(angle);
+
+  context.lineTo(x1, y1);
+  context.globalAlpha = 0.3;
+  context.restore();
 
   context.lineWidth = 2;
   context.strokeStyle = '#fff';
@@ -284,7 +292,6 @@ function drawSunLayerLine(x, y, angle, length) {
 
 function drawSun(x, y, angle, radius) {
 
-  // Sun
   context.beginPath();
   context.arc(x - radius, y, 15, 0, 2 * Math.PI, false);
   context.fillStyle = '#fff';
@@ -296,7 +303,6 @@ function drawSun(x, y, angle, radius) {
 
 function drawSunPath(x, y, radius) {
 
-  // Path
   context.beginPath();
   context.globalAlpha = 0.09;
   context.arc(x, y, radius, 0, 2 * Math.PI, false);
@@ -320,9 +326,9 @@ function drawSunLayer() {
   var a = sunrisePos.azimuth;
   var r = 250;
 
-  drawSunLayerLine(p1.x, p1.y, a, r);
   drawSun(p1.x, p1.y, a, r);
   drawSunPath(p1.x, p1.y, r);
+  drawSunLayerLine(p1.x, p1.y, a, r);
 
 }
 
