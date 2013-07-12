@@ -79,7 +79,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   user-select: none;
 }
 
-@-webkit-keyframes animate {
+@-webkit-keyframes fadeIn {
   0% {
     opacity: 0;
   }
@@ -89,7 +89,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   }
 }
 
-@-moz-keyframes animate {
+@-moz-keyframes fadeIn {
   0% {
     opacity: 0;
   }
@@ -99,7 +99,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   }
 }
 
-@-o-keyframes animate {
+@-o-keyframes fadeIn {
   0% {
     opacity: 0;
   }
@@ -109,7 +109,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
   }
 }
 
-@keyframes animate {
+@keyframes fadeIn {
   0% {
     opacity: 0;
   }
@@ -148,13 +148,13 @@ body .cover {
   background-size: cover;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.../img/bkg.jpg', sizingMethod='scale');
   -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bkg.jpg', sizingMethod='scale')";
-  -webkit-animation: animate 5s;
+  -webkit-animation: fadeIn 5s;
   /* Safari 4+ */
-  -moz-animation: animate 5s;
+  -moz-animation: fadeIn 5s;
   /* Fx 5+ */
-  -o-animation: animate 5s;
+  -o-animation: fadeIn 5s;
   /* Opera 12+ */
-  animation: animate 5s;
+  animation: fadeIn 5s;
   /* IE 10+ */
 }
 

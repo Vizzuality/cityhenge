@@ -5,19 +5,19 @@
 
 $breakpoint-medium-width: max-width 700px;
 
-@-webkit-keyframes animate {
+@-webkit-keyframes fadeIn {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
-@-moz-keyframes animate {
+@-moz-keyframes fadeIn {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
-@-o-keyframes animate {
+@-o-keyframes fadeIn {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
-@keyframes animate {
+@keyframes fadeIn {
   0%   { opacity: 0; }
   100% { opacity: 1; }
 }
@@ -37,10 +37,10 @@ body{
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.../img/bkg.jpg', sizingMethod='scale');
     -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bkg.jpg', sizingMethod='scale')";
 
-    -webkit-animation: animate 5s; /* Safari 4+ */
-    -moz-animation:    animate 5s; /* Fx 5+ */
-    -o-animation:      animate 5s; /* Opera 12+ */
-    animation:         animate 5s; /* IE 10+ */
+    -webkit-animation: fadeIn 5s; /* Safari 4+ */
+    -moz-animation:    fadeIn 5s; /* Fx 5+ */
+    -o-animation:      fadeIn 5s; /* Opera 12+ */
+    animation:         fadeIn 5s; /* IE 10+ */
 
   }
 
