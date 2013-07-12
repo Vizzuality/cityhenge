@@ -127,7 +127,7 @@ function moveHighlightToCurrentDay(animated) {
 
   var june = new Date(2013, 5, 1);
 
-  var width = (currentDayNumber - getDayNumber(june))*ratio;
+  var width = 10+(currentDayNumber - getDayNumber(june))*ratio;
 
   if (animated) {
 
