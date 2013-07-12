@@ -248,7 +248,6 @@ a.button:hover{
       font-weight:bold;
       color:#fff;
       @include opacity(.5);
-      /*@include simple-transition(all, 100ms);*/
       text-transform: uppercase;
       cursor: pointer;
     }

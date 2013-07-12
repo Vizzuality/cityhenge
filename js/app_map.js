@@ -1,4 +1,4 @@
-var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+var months  = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var months2 = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"];
 var context, tt, shader, tod, map, curtod, city;
 
@@ -27,6 +27,7 @@ function setupMonths() {
 
 }
 
+/* Returns the number of the day */
 function getDayNumber() {
   var now = new Date();
   var start = new Date(now.getFullYear(), 0, 0);
@@ -35,17 +36,20 @@ function getDayNumber() {
   return Math.floor(diff / oneDay);
 }
 
+function moveHighlightToCurrentDay() {
+
+  var currentDayNumber = getDayNumber();
+  var ratio = 365/$(document).width();
+
+  $(".highlight").css({ width: currentDayNumber * (1-ratio) });
+  $(".handle").css({ left: currentDayNumber * (1-ratio) - 10 });
+
+}
+
 $(function() {
 
-
-var d = getDayNumber();
-var ratio = 365/$(document).width();
-
-$(".highlight").css({ width: d * (1-ratio) });
-$(".handle").css({ left: d * (1-ratio) - 10 });
-
 setupMonths();
-
+//moveHighlightToCurrentDay();
 
 $("#slider").on("click", function(e) {
 
@@ -60,7 +64,6 @@ $("#slider").on("click", function(e) {
 
   tt     = SunCalc.getTimes(time, c.lat, c.lon);
   curtod = new Date(tt.sunset);
-
 
   var cen = map.getCenter();
   var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
@@ -143,21 +146,21 @@ function onDrag(e) {
   curtod = new Date(tt.sunset);
 }
 
-function onStart(e) {
+function onDragStart(e) {
 
-  var w = $(e.target).position().left
+  var l = $(e.target).position().left
 
-  updateDate(w);
+  updateDate(l);
 
   $(".date").fadeIn(250);
 
 }
 
-function onStop(e) {
-  var w = $(e.target).position().left
+function onDragStop(e) {
+  var l = $(e.target).position().left
 
   $(".date").fadeOut(250);
-  $(".highlight").width(w + 10);
+  $(".highlight").width(l + 10);
 
   updateMap();
 
@@ -166,9 +169,9 @@ function onStop(e) {
 $( "#slider .handle" ).draggable({
   containment: "parent",
   axis: "x",
-  start: onStart,
+  start: onDragStart,
   drag: onDrag,
-  stop: onStop
+  stop: onDragStop
 });
 
 });
@@ -264,7 +267,49 @@ var primitive_render = this.primitive_render = {
 
 }
 
-function paintSun() {
+
+function drawSunLayerLine(x, y, angle, length) {
+
+  // Line
+  context.beginPath();
+  context.moveTo(x, y);
+
+  context.lineTo(x + Math.cos(angle*180/Math.PI)*length, y + Math.sin(angle*180/Math.PI)*length);
+
+  context.lineWidth = 2;
+  context.strokeStyle = '#fff';
+  context.stroke();
+
+}
+
+function drawSun(x, y, angle, radius) {
+
+  // Sun
+  context.beginPath();
+  context.arc(x - radius, y, 15, 0, 2 * Math.PI, false);
+  context.fillStyle = '#fff';
+  context.fill();
+  context.lineWidth = 0;
+  context.stroke();
+
+}
+
+function drawSunPath(x, y, radius) {
+
+  // Path
+  context.beginPath();
+  context.globalAlpha = 0.09;
+  context.arc(x, y, radius, 0, 2 * Math.PI, false);
+  context.fillStyle = 'none';
+  context.fill();
+  context.lineWidth = 30;
+  context.strokeStyle = '#fff';
+  context.stroke();
+  context.restore();
+
+}
+
+function drawSunLayer() {
 
   var cen = map.getCenter();
 
@@ -275,34 +320,9 @@ function paintSun() {
   var a = sunrisePos.azimuth;
   var r = 300;
 
-  // Line
-  context.beginPath();
-  context.moveTo(p1.x, p1.y);
-
-  context.lineTo(p1.x + Math.cos(a*180/Math.PI)*r, p1.y + Math.sin(a*180/Math.PI)*r); // ?
-
-  context.lineWidth = 2;
-  context.strokeStyle = '#fff';
-  context.stroke();
-
-  // Sun
-  context.beginPath();
-  context.arc(p1.x - 300, p1.y, 15, 0, 2 * Math.PI, false);
-  context.fillStyle = '#fff';
-  context.fill();
-  context.lineWidth = 0;
-  context.stroke();
-
-  // Path
-  context.beginPath();
-  context.globalAlpha = 0.09;
-  context.arc(p1.x, p1.y, 300, 0, 2 * Math.PI, false);
-  context.fillStyle = 'none';
-  context.fill();
-  context.lineWidth = 30;
-  context.strokeStyle = '#fff';
-  context.stroke();
-  context.restore();
+  drawSunLayerLine(p1.x, p1.y, a, r);
+  drawSun(p1.x, p1.y, a, r);
+  drawSunPath(p1.x, p1.y, r);
 
 }
 
@@ -370,7 +390,7 @@ function initMap(options) {
   canvas.width  = $(document).width();
   canvas.height = $(document).height();
 
-  paintSun();
+  drawSunLayer();
 
 
 
