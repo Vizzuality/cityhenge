@@ -192,26 +192,25 @@ a.button:hover{
   ul {
     float: right;
     margin: 25px 30px 0 0;
-  }
 
-  ul li{
-    display: inline;
-  }
+    li {
+      display: inline;
+      margin-left: 10px;
 
-  ul li a{
-    font-weight: normal;
-    font-size: 17px;
-    letter-spacing: 0px;
-    margin: 0 0 0 30px;
-    color: rgba(255,255,255,0.5);
-    cursor: default;
-  }
+      a {
+        font-weight: normal;
+        font-size: 17px;
+        letter-spacing: 0px;
+        margin: 0 0 0 30px;
+          text-decoration:none;
 
-  ul li a.selected{
-    color: rgba(255,255,255,1);
-    cursor: pointer;
-  }
+        &:hover {
+        text-decoration:underline;
+        }
 
+      }
+    }
+  }
 }
 
 
