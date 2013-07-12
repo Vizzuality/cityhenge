@@ -356,7 +356,7 @@ body.map {
 .embedWindow {
   @include box-sizing(border-box);
   display:none;
-  @include absolute-center(500px, 200px);
+  @include absolute-center(480px, 220px);
   background:#fff;
   @include border-radius(3px);
   z-index: 10000;
@@ -365,14 +365,18 @@ body.map {
   text-align: left;
 
   h3 {
-    margin: 0 0 20px 0;
+    margin: 0;
     font-weight:bold;
   }
 
-  p {
-    color: #333;
-    &.code { color: #666; }
-
+  .code {
+    margin-top: 10px;
+    color: #666;
+    padding: 10px;
+    width: 400px;
+    height: 100px;
+    font-size: 14px;
   }
+
 }
 

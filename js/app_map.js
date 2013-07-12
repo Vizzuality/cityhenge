@@ -17,7 +17,7 @@ function openEmbedWindow(e) {
   var url = '<iframe src="'+ window.location + '" width="800px" height="700px" frameborder="0"></iframe>';
 
   $(".embedWindow").fadeIn(250);
-  $(".embedWindow p.code").text(url);
+  $(".embedWindow .code").text(url);
 
 }
 
