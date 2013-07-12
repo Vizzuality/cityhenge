@@ -134,20 +134,6 @@ function moveHighlightToCurrentDay(animated) {
 
 $(function() {
 
-// Start animations
-$("#header").delay(1000).animate({ opacity: 1, top: 0    }, { easing: "easeOutQuad", duration: 250 });
-$("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, { easing: "easeOutQuad", duration: 250, complete: function() {
-
-  if (!location.hash) moveHighlightToCurrentDay(true);
-
-    setupMonths();
-    setupSunLayerCanvas();
-    drawSunLayer();
-    $(".credits, .cartodb_logo, #zoom").fadeIn(250);
-
-
-}});
-
 
 $("#slider").on("click", onSliderClick);
 
@@ -609,5 +595,21 @@ function initMap(options) {
   }
 
   hash = new MM.Hash(map);
+
+// Start animations
+$("#header").delay(1000).animate({ opacity: 1, top: 0    }, { easing: "easeOutQuad", duration: 250 });
+$("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, { easing: "easeOutQuad", duration: 250, complete: function() {
+
+  if (!location.hash) moveHighlightToCurrentDay(true);
+
+    setupMonths();
+    setupSunLayerCanvas();
+    drawSunLayer();
+    $(".credits, .cartodb_logo, #zoom").fadeIn(250);
+
+
+}});
+
+
 
 }
