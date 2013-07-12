@@ -13,11 +13,19 @@ function openEmbedWindow(e) {
   e.preventDefault();
   e.stopPropagation();
 
-
   var url = '<iframe src="'+ window.location + '" width="800px" height="700px" frameborder="0"></iframe>';
 
   $(".embedWindow").fadeIn(250);
   $(".embedWindow .code").text(url);
+  $(".embedWindow .close").click(hideEmbedWindow);
+
+}
+
+function hideEmbedWindow(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+  $(".embedWindow").fadeOut(250);
 
 }
 
@@ -254,8 +262,6 @@ function onDrag(e) {
   updateDate(w);
 
   curtod = new Date(tt.sunset);
-  //console.log(w, curtod);
-
   drawSunLayer();
 
 
@@ -285,7 +291,6 @@ function onDragStop(e) {
 }
 
 function updateHash() {
-  console.log(curtod);
 
   cDay   = curtod.getDate();
   cMonth = curtod.getMonth() + 1;
