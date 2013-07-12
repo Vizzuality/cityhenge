@@ -189,7 +189,6 @@ function onDrag(e) {
   updateDate(w);
   curtod = new Date(tt.sunset);
 
-  console.log(curtod);
   drawSunLayer();
 }
 
