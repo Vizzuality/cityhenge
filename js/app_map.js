@@ -19,9 +19,14 @@ function adjustMonths(l) {
 
 }
 
+function getDaysInMonth(month) {
+  var now = new Date();
+  return new Date(now.getYear(), month, 0).getDate();
+}
+
 function setupMonths() {
 
-  var ratio = Math.floor(31 * $(window).width()/365);
+  var ratio = Math.floor(30 * $(window).width()/365);
   var monthPadding = 5;
 
   for (var i = 0; i <= 11; i++) {
@@ -104,8 +109,10 @@ function updateDate(left) {
   var handlePos = $(".handle").position().left + $(".handle").width();
   var rightLimit = $(window).width() - handlePos;
 
-  if (rightLimit <= 60) {
-    $(".date").css({ left: $(window).width() - 65 });
+  if (handlePos  < $(".date").width() ) {
+    $(".date").css({ left: 10 });
+  } else if (rightLimit <= 60) {
+    $(".date").css({ left: $(window).width() - 80 });
   } else {
     $(".date").css({ left: left - $(".date").width() / 2 });
   }
