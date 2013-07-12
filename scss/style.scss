@@ -309,3 +309,42 @@ a.button:hover{
   position:absolute;
   z-index: 1000;
 }
+
+
+
+/* Zoom */
+
+#zoom {
+
+  $zoomWidth: 43px;
+  $zoomHeight: 36px; // distance from the top of the canvas until the middle line
+
+  @include position(10px, 10px, false, false);
+
+  $url: "../img/map-zoom.png";
+
+  z-index: 1000;
+
+  .zoom_in,
+  .zoom_out { display:block; position:relative; width: $zoomWidth; height: $zoomHeight; cursor: pointer; }
+
+  .zoom_in {
+    background: transparent url($url) no-repeat 0 0;
+    &:hover  { background: transparent url($url) no-repeat -1*$zoomWidth 0; }
+    &:active { background: transparent url($url) no-repeat -2*$zoomWidth 0; }
+  }
+
+  .zoom_out {
+    background: transparent url($url) no-repeat 0 -1*$zoomHeight;
+    &:hover  { background: transparent url($url) no-repeat -1*$zoomWidth -1*$zoomHeight; }
+    &:active { background: transparent url($url) no-repeat -2*$zoomWidth -1*$zoomHeight; }
+  }
+}
+
+
+.credits {
+  @include position(false, 7px, 7px, false);
+  &, a { font-size: 12px; color:#fff; }
+
+
+}

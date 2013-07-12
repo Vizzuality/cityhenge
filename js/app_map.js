@@ -2,6 +2,15 @@ var months  = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "O
 
 var canvas, context, tt, shader, tod, map, curtod, city;
 
+
+function zoomIn() {
+  map.setZoom(map.getZoom() + 1);
+}
+
+function zoomOut() {
+  map.setZoom(map.getZoom() - 1);
+}
+
 $(window).resize(function(){
   adjustMonths(document.body.clientWidth);
   drawSunLayer();
