@@ -260,12 +260,14 @@ var primitive_render = this.primitive_render = {
 
     }
   },
+
   'MultiPolygon': function(ctx, coordinates) {
     var prender = primitive_render['Polygon'];
     for(var i=0; i < coordinates.length; ++i) {
       prender(ctx, coordinates[i][0]);
     }
   },
+
   'LineString': function(ctx, coordinates) {
     var p = primitive_render['Polygon'];
     p(ctx, coordinates);
@@ -274,7 +276,7 @@ var primitive_render = this.primitive_render = {
 
 }
 
-function drawSunLayerLine(x, y, azimuth, length) {
+function drawSunLine(x, y, azimuth, length) {
 
   context.beginPath();
 
@@ -297,6 +299,11 @@ function drawSunLayerLine(x, y, azimuth, length) {
 
 }
 
+/*
+*
+* Draws the Sun
+*
+* */
 function drawSun(x, y, azimuth, length) {
 
   var angle = azimuth*180 / Math.PI;
@@ -313,6 +320,11 @@ function drawSun(x, y, azimuth, length) {
 
 }
 
+/*
+*
+* Draws the path where the Sun moves
+*
+* */
 function drawSunPath(x, y, radius) {
 
   context.beginPath();
@@ -327,6 +339,11 @@ function drawSunPath(x, y, radius) {
 
 }
 
+/*
+*
+* Initialices the canvas for the Sun layer
+*
+* */
 function setupSunLayerCanvas() {
 
   canvas  = document.getElementById("sun");
@@ -337,6 +354,11 @@ function setupSunLayerCanvas() {
 
 }
 
+/*
+*
+* Draws the Sun layer
+*
+* */
 function drawSunLayer() {
 
   canvas.width = canvas.width; // resets canvas
@@ -352,7 +374,7 @@ function drawSunLayer() {
 
   drawSun(p1.x, p1.y, a, r);
   drawSunPath(p1.x, p1.y, r);
-  drawSunLayerLine(p1.x, p1.y, a, r);
+  drawSunLine(p1.x, p1.y, a, r);
 
 }
 
