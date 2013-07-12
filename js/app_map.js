@@ -273,7 +273,6 @@ function paintSun() {
 
   var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
   var a = sunrisePos.azimuth;
-  console.log(a);
   var r = 300;
 
   // Line
