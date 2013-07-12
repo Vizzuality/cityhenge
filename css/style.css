@@ -328,11 +328,17 @@ a.button:hover {
 }
 #header ul {
   float: right;
-  margin: 25px 30px 0 0;
+  margin: 25px 55px 0 0;
 }
 #header ul li {
   display: inline;
-  margin-left: 10px;
+  margin-left: 5px;
+}
+#header ul li.about {
+  margin-right: 10px;
+}
+#header ul li.facebook {
+  margin-left: -20px;
 }
 #header ul li a {
   font-weight: normal;
@@ -455,4 +461,60 @@ a.button:hover {
 #sun {
   position: absolute;
   z-index: 1000;
+}
+
+/* Zoom */
+#zoom {
+  position: absolute;
+  top: 90px;
+  left: 20px;
+  z-index: 1000;
+}
+#zoom .zoom_in,
+#zoom .zoom_out {
+  display: block;
+  position: relative;
+  width: 43px;
+  height: 36px;
+  cursor: pointer;
+}
+#zoom .zoom_in {
+  background: transparent url("../img/map-zoom.png") no-repeat 0 0;
+}
+#zoom .zoom_in:hover {
+  background: transparent url("../img/map-zoom.png") no-repeat -43px 0;
+}
+#zoom .zoom_in:active {
+  background: transparent url("../img/map-zoom.png") no-repeat -86px 0;
+}
+#zoom .zoom_out {
+  background: transparent url("../img/map-zoom.png") no-repeat 0 -36px;
+}
+#zoom .zoom_out:hover {
+  background: transparent url("../img/map-zoom.png") no-repeat -43px -36px;
+}
+#zoom .zoom_out:active {
+  background: transparent url("../img/map-zoom.png") no-repeat -86px -36px;
+}
+
+body.map .credits {
+  position: absolute;
+  right: 10px;
+  bottom: 83px;
+  z-index: 10000;
+}
+body.map .credits, body.map .credits a {
+  font-size: 12px;
+  color: #fff;
+}
+
+.credits {
+  display: none;
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+}
+.credits, .credits a {
+  font-size: 12px;
+  color: #fff;
 }
