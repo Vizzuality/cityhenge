@@ -3,7 +3,7 @@
 @import "helpers";
 @import "breakpoint";
 
-$breakpoint-small-width: max-width 610px;
+$breakpoint-small-width: max-width 600px;
 $breakpoint-medium-width: max-width 760px;
 $breakpoint-big-width: max-width 1000px;
 
@@ -171,17 +171,23 @@ a.button:hover{
     margin: 20px 0 0 30px;
     float: left;
 
-    @include breakpoint($breakpoint-medium-width) {
-      margin: 20px 0 0 15px;
-    }
+    &.title {
 
-    @include breakpoint($breakpoint-small-width) {
-      span { display:none; }
-    }
+      @include breakpoint($breakpoint-big-width) {
+        margin: 23px 0 0 30px;
+        font-size: 18px;
+      }
 
-    @include breakpoint($breakpoint-big-width) {
-      margin: 23px 0 0 30px;
-      font-size: 18px;
+      @include breakpoint($breakpoint-medium-width) {
+        margin: 23px 0 0 15px;
+      }
+
+      @include breakpoint($breakpoint-small-width) {
+        margin: 23px 0 0 15px;
+        span { display:none; }
+      }
+
+
     }
 
   }
