@@ -618,6 +618,7 @@ $("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, { easing: "easeOutQu
     setupSunLayerCanvas();
     drawSunLayer();
     $(".credits, .cartodb_logo, #zoom").fadeIn(250);
+    $(".tip").delay(1500).fadeIn(250);
 
 
 }});

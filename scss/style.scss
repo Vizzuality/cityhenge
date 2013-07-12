@@ -284,6 +284,7 @@ a.button:hover{
   }
 
   .tip {
+    display:none;
     background: url(../img/arrow.png) no-repeat 0 3px;
     @include text-shadow(0 0 10px #000);
     padding-left: 20px;

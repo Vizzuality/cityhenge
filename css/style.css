@@ -451,6 +451,7 @@ a.button:hover {
   cursor: pointer;
 }
 #slider .tip {
+  display: none;
   background: url(../img/arrow.png) no-repeat 0 3px;
   text-shadow: 0 0 10px black;
   padding-left: 20px;
