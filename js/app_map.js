@@ -332,9 +332,9 @@ function drawSunLine(x, y, azimuth, length) {
 
   var angle = azimuth*180 / Math.PI;
 
-  var x1 = x + Math.cos(angle) * length;
-  var y1 = y + Math.sin(angle) * length;
-
+  var x1 = x + Math.cos(azimuth+(Math.PI/2)) * length;
+  var y1 = y + Math.sin(azimuth+(Math.PI/2)) * length;
+  
   context.moveTo(x, y);
   context.lineTo(x1, y1);
 
@@ -356,8 +356,8 @@ function drawSun(x, y, azimuth, length) {
 
   var angle = azimuth*180 / Math.PI;
 
-  var x1 = x + Math.cos(angle) * length;
-  var y1 = y + Math.sin(angle) * length;
+  var x1 = x + Math.cos(azimuth+(Math.PI/2)) * length;
+  var y1 = y + Math.sin(azimuth+(Math.PI/2)) * length;
 
   context.beginPath();
   context.arc(x1, y1, 15, 0, 2 * Math.PI, false);
@@ -415,7 +415,6 @@ function drawSunLayer() {
 
   var l1 = new MM.Location(cen.lat, cen.lon);
   var p1 = map.locationPoint(l1);
-
   var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
   var a = sunrisePos.azimuth;
   var r = ($(document).height() - $("#slider").outerHeight(true) - $("#header").outerHeight(true)) / 2 - 30;
