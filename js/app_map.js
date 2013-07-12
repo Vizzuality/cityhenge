@@ -70,6 +70,28 @@ function getCurrentDayNumber() {
   return Math.floor(diff / oneDay);
 }
 
+function moveHighlightToDate(date, animated) {
+
+  var currentDayNumber = getDayNumber(date);
+  var ratio = $(window).width()/365;
+
+  var june = new Date(2013, 5, 1);
+
+  var width = (currentDayNumber - getDayNumber(june))*ratio;
+
+  if (animated) {
+
+    $(".highlight").delay(500).animate({ width: width }, { easing: "easeOutQuad", duration: 250, complete: function() {
+        $(".handle").css({ left: width - 10 });
+    }});
+
+    } else {
+    $(".highlight").css({ width: width });
+    $(".handle").css({ left: width - 10 });
+  }
+
+}
+
 function moveHighlightToCurrentDay(animated) {
 
   var currentDayNumber = getCurrentDayNumber();
@@ -98,7 +120,8 @@ $(function() {
 $("#header").delay(1000).animate({ opacity: 1, top: 0    }, { easing: "easeOutQuad", duration: 250 });
 $("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, { easing: "easeOutQuad", duration: 250, complete: function() {
 
-    moveHighlightToCurrentDay(true);
+  if (!location.hash) moveHighlightToCurrentDay(true);
+
     setupMonths();
     setupSunLayerCanvas();
     drawSunLayer();
@@ -268,11 +291,12 @@ function onDragStop(e) {
 }
 
 function updateHash() {
+  console.log(curtod);
 
   cDay   = curtod.getDate();
   cMonth = curtod.getMonth() + 1;
-  new MM.Hash(map)
 
+  hash.onMapMove(map);
 }
 
 $( "#slider .handle" ).draggable({
@@ -475,12 +499,26 @@ function drawSunLayer() {
 
 SketchRender.prototype = new VECNIK.Renderer();
 
-var d = new Date(2013, 6, 1);
+var d = new Date(2013, 6, 12);
+
+if (location.hash) {
+  var h = location.hash.split("/");
+  var day   = h[4];
+  var month = h[3];
+  d = new Date(2013, month - 1, day);
+
+  moveHighlightToDate(d);
+} else {
+
+  moveHighlightToCurrentDay(true);
+}
+
 var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
 
 function initMap(options) {
   city = options;
   tod = new Date(utc + (3600000 * city.offset));
+  console.log(tod);
   var tt = SunCalc.getTimes(tod, city.y, city.x );
   curtod = new Date(tt.sunset);
 
@@ -528,7 +566,7 @@ function initMap(options) {
 
   if (!location.hash) {
     var today = new Date();
-    cDay = today.getDate();
+    cDay   = today.getDate();
     cMonth = today.getMonth() + 1;
     map.setCenterZoom(new MM.Location(city.y, city.x ), city.z);
   }

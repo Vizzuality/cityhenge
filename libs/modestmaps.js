@@ -1072,16 +1072,24 @@ var MM = com.modestmaps = {
 
         parseHash: function(hash) {
             var args = hash.split("/");
+
             if (args.length == 5) {
+
                 var zoom = parseInt(args[0], 10),
                     lat = parseFloat(args[1]),
                     lon = parseFloat(args[2]);
+                    month = parseFloat(args[3]);
+                    day = parseFloat(args[4]);
+
+                    console.log(month, day);
                 if (isNaN(zoom) || isNaN(lat) || isNaN(lon)) {
                     return false;
                 } else {
                     return {
                         center: new MM.Location(lat, lon),
-                        zoom: zoom
+                        zoom: zoom,
+                        day: day,
+                        month: month
                     };
                 }
             } else {
@@ -1093,11 +1101,14 @@ var MM = com.modestmaps = {
             var center = map.getCenter(),
                 zoom   = map.getZoom(),
                 precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
+
             return "#" + [zoom,
                 center.lat.toFixed(precision),
                 center.lon.toFixed(precision),
-                cDay,cMonth
+                cMonth,
+                cDay
             ].join("/");
+
         },
 
         init: function(map) {
@@ -1141,11 +1152,19 @@ var MM = com.modestmaps = {
             }
             var sansHash = hash.substr(1),
                 parsed = this.parseHash(sansHash);
+
+            if (!cDay) {
+              cDay = parsed.day;
+              cMonth = parsed.month;
+            }
+
             if (parsed) {
                 // console.log("parsed:", parsed.zoom, parsed.center.toString());
                 this.movingMap = true;
                 this.map.setCenterZoom(parsed.center, parsed.zoom);
                 this.movingMap = false;
+                this.day   = parsed.day;
+                this.month = parsed.month;
             } else {
                 // console.warn("parse error; resetting:", this.map.getCenter(), this.map.getZoom());
                 this.onMapMove(this.map);
