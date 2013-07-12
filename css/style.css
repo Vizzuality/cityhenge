@@ -220,19 +220,6 @@ header {
   }
 }
 
-.content {
-  position: absolute;
-  bottom: 200px;
-  width: 100%;
-  text-align: center;
-}
-.content p {
-  width: 557px;
-  margin: 0 auto 40px auto;
-  font-size: 17px;
-  color: #fff;
-}
-
 .bottom {
   display: block;
   text-align: center;
@@ -244,7 +231,7 @@ header {
 }
 
 h2 {
-  margin: 0 auto 50px auto;
+  margin: 0 auto 40px auto;
   font-size: 17px;
   font-weight: normal;
   color: #fff;
@@ -259,10 +246,6 @@ h2 {
   *vertical-align: auto;
   zoom: 1;
   *display: inline;
-  font-size: 17px;
-  color: #fff;
-  font-weight: bold;
-  text-decoration: none;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
@@ -278,8 +261,12 @@ h2 {
   -moz-transition-timing-function: ease-in;
   -o-transition-timing-function: ease-in;
   transition-timing-function: ease-in;
+  font-size: 17px;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
   border: 3px solid rgba(0, 0, 0, 0.3);
-  padding: 18px 24px;
+  padding: 15px 30px;
 }
 .btn:hover {
   border: 3px solid rgba(0, 0, 0, 0.5);
