@@ -264,7 +264,7 @@ function SketchRender() {
     dy *= 0.15;
 
     var lw = 0.4;
-    var tolerance = 0.03;
+    var tolerance = 0.015;
 
     var r = Math.atan2(p1.y - p0.y, p1.x - p0.x) + 0.5*Math.PI;
     r = r < 0 ? r+Math.PI*2 : r;
@@ -273,16 +273,16 @@ function SketchRender() {
     // d = d < Math.PI ? d : d - Math.PI;
     if (d < tolerance*Math.PI){
       ctx.strokeStyle = "rgba(255, 5, 0, 1.0)";
-    var lw = 1.4;
-    } else if (d < (tolerance * 1.1)*Math.PI){
+      var lw = 2;
+    } else if (d < (tolerance * 1.5)*Math.PI){
       ctx.strokeStyle = "rgba(234, 98, 54 ,0.8)";
-      lw = 2
-    } else if (d < (tolerance * 1.2)*Math.PI){
-      ctx.strokeStyle = "rgba(201, 85, 43,0.6)";
-      lw = 1.8
-    } else if (d < (tolerance * 1.3)*Math.PI){
-      ctx.strokeStyle = "rgba(183, 72, 37,0.4)";
-      lw = 1.2
+      lw = 1.7
+    } else if (d < (tolerance * 2)*Math.PI){
+      ctx.strokeStyle = "rgba(201, 85, 43,0.5)";
+      lw = 1.3
+    } else if (d < (tolerance * 3)*Math.PI){
+      ctx.strokeStyle = "rgba(183, 72, 37,0.2)";
+      lw = 1
     } else {
       ctx.strokeStyle = "rgba(33, 33, 33,0.5)";
       lw = 0.4;
