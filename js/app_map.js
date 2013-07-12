@@ -4,11 +4,13 @@ var canvas, context, tt, shader, tod, map, curtod, city;
 
 
 function zoomIn() {
-  map.setZoom(map.getZoom() + 1);
+  if (map.getZoom()<15)
+    map.setZoom(map.getZoom() + 1);
 }
 
 function zoomOut() {
-  map.setZoom(map.getZoom() - 1);
+  if (map.getZoom()>11)
+    map.setZoom(map.getZoom() - 1);
 }
 
 $(window).resize(function(){
