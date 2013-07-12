@@ -305,7 +305,7 @@ function SketchRender() {
       ctx.strokeStyle = "rgba(183, 72, 37,0.2)";
       lw = 1
     } else {
-      ctx.strokeStyle = "rgba(33, 33, 33,0.5)";
+      ctx.strokeStyle = "rgb(20,20,20)";
       lw = 0.4;
     }
     // }
