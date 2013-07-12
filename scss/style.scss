@@ -173,8 +173,11 @@ a.button:hover{
   ul {
     float: right;
     margin: 25px 55px 0 0;
+    @include clearfix();
 
     li {
+
+      float:left;
 
       &.about { margin-right: 10px; }
       &.facebook { margin-left: -20px; }

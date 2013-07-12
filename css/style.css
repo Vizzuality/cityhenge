@@ -316,7 +316,18 @@ a.button:hover {
   float: right;
   margin: 25px 55px 0 0;
 }
+#header ul {
+  *zoom: 1;
+}
+#header ul:before, #header ul:after {
+  content: "";
+  display: table;
+}
+#header ul:after {
+  clear: both;
+}
 #header ul li {
+  float: left;
   display: inline;
   margin-left: 5px;
 }
