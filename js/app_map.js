@@ -55,36 +55,7 @@ $(function() {
 setupMonths();
 //moveHighlightToCurrentDay();
 
-$("#slider").on("click", function(e) {
-
-  $(".date").hide();
-
-  var ratio = $(document).width()/365;
-
-  var w = e.screenX;
-
-  var c = map.getCenter();
-  var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
-
-  tt     = SunCalc.getTimes(time, c.lat, c.lon);
-  curtod = new Date(tt.sunset);
-
-  var cen = map.getCenter();
-  var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
-  console.log(sunrisePos.azimuth);
-
-  updateDate(w - 10);
-
-  $(".handle").css({ left: w - 10 });
-  $(".highlight").animate({ width: w + "px"}, 150);
-
-  $(".date").stop().fadeIn(250, function() {
-    $(this).delay(2000).fadeOut(250);
-    updateMap();
-  });
-
-
-});
+$("#slider").on("click", onSliderClick);
 
 function updateDate(left) {
 
@@ -128,6 +99,40 @@ function updateMap() {
   });
 }
 
+
+function onSliderClick(e) {
+
+  drawSunLayer();
+
+  $(".date").hide();
+
+  var ratio = $(document).width()/365;
+
+  var w = e.screenX;
+
+  var c = map.getCenter();
+  var time = curtod.setTime( tod.getTime() + w/ratio * 1000 * 60 * 60 * 24 );
+
+  tt     = SunCalc.getTimes(time, c.lat, c.lon);
+  curtod = new Date(tt.sunset);
+
+  var cen = map.getCenter();
+  var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
+  //console.log(sunrisePos.azimuth);
+
+  updateDate(w - 10);
+
+  $(".handle").css({ left: w - 10 });
+  $(".highlight").animate({ width: w + "px"}, 150);
+
+  $(".date").stop().fadeIn(250, function() {
+    $(this).delay(2000).fadeOut(250);
+    updateMap();
+  });
+
+  drawSunLayer();
+
+}
 
 function onDrag(e) {
 
@@ -269,7 +274,6 @@ var primitive_render = this.primitive_render = {
 
 }
 
-
 function drawSunLayerLine(x, y, azimuth, length) {
 
   context.beginPath();
@@ -293,10 +297,15 @@ function drawSunLayerLine(x, y, azimuth, length) {
 
 }
 
-function drawSun(x, y, angle, radius) {
+function drawSun(x, y, azimuth, length) {
+
+  var angle = azimuth*180 / Math.PI;
+
+  var x1 = x + Math.cos(angle) * length;
+  var y1 = y + Math.sin(angle) * length;
 
   context.beginPath();
-  context.arc(x - radius, y, 15, 0, 2 * Math.PI, false);
+  context.arc(x1, y1, 15, 0, 2 * Math.PI, false);
   context.fillStyle = '#fff';
   context.fill();
   context.lineWidth = 0;
@@ -340,7 +349,6 @@ function drawSunLayer() {
   var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
   var a = sunrisePos.azimuth;
   var r = 250;
-  console.log($(document).height());
 
   drawSun(p1.x, p1.y, a, r);
   drawSunPath(p1.x, p1.y, r);
