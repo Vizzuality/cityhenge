@@ -319,7 +319,7 @@ a.button:hover{
   $zoomWidth: 43px;
   $zoomHeight: 36px; // distance from the top of the canvas until the middle line
 
-  @include position(80px, false, false, 20px);
+  @include position(90px, false, false, 20px);
 
   $url: "../img/map-zoom.png";
 
@@ -342,9 +342,15 @@ a.button:hover{
 }
 
 
+body.map {
+  .credits {
+    @include position(false, 10px, 83px, false);
+    &, a { font-size: 12px; color:#fff; }
+    z-index: 10000;
+  }
+}
 .credits {
+  display:none;
   @include position(false, 7px, 7px, false);
   &, a { font-size: 12px; color:#fff; }
-
-
 }

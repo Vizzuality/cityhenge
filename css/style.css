@@ -466,7 +466,7 @@ a.button:hover {
 /* Zoom */
 #zoom {
   position: absolute;
-  top: 80px;
+  top: 90px;
   left: 20px;
   z-index: 1000;
 }
@@ -497,7 +497,19 @@ a.button:hover {
   background: transparent url("../img/map-zoom.png") no-repeat -86px -36px;
 }
 
+body.map .credits {
+  position: absolute;
+  right: 10px;
+  bottom: 83px;
+  z-index: 10000;
+}
+body.map .credits, body.map .credits a {
+  font-size: 12px;
+  color: #fff;
+}
+
 .credits {
+  display: none;
   position: absolute;
   right: 7px;
   bottom: 7px;

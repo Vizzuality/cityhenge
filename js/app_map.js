@@ -96,6 +96,7 @@ $("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, { easing: "easeOutQu
     setupMonths();
     setupSunLayerCanvas();
     drawSunLayer();
+    $(".credits").fadeIn(250);
 
 }});
 
