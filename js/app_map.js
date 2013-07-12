@@ -21,7 +21,7 @@ function adjustMonths(l) {
 
 function setupMonths() {
 
-  var ratio = Math.floor(31 * $(document).width()/365);
+  var ratio = Math.floor(31 * $(window).width()/365);
   var monthPadding = 5;
 
   for (var i = 0; i <= 11; i++) {
@@ -32,8 +32,17 @@ function setupMonths() {
 
 }
 
-/* Returns the number of the day */
-function getDayNumber() {
+
+/* Returns the number of a day */
+function getDayNumber(date) {
+  var start = new Date(date.getFullYear(), 0, 0);
+  var diff = date - start;
+  var oneDay = 1000 * 60 * 60 * 24;
+  return Math.floor(diff / oneDay);
+}
+
+/* Returns the number of the current day */
+function getCurrentDayNumber() {
   var now = new Date();
   var start = new Date(now.getFullYear(), 0, 0);
   var diff = now - start;
@@ -43,18 +52,22 @@ function getDayNumber() {
 
 function moveHighlightToCurrentDay() {
 
-  var currentDayNumber = getDayNumber();
-  var ratio = 365/$(document).width();
+  var currentDayNumber = getCurrentDayNumber();
+  var ratio = Math.floor($(window).width()/365);
 
-  $(".highlight").css({ width: currentDayNumber * (1-ratio) });
-  $(".handle").css({ left: currentDayNumber * (1-ratio) - 10 });
+  var june = new Date(2013, 5, 1);
+
+  var width = currentDayNumber*ratio - getDayNumber(june)*ratio;
+
+  $(".highlight").css({ width: width });
+  $(".handle").css({ left: $(".highlight").position().left - 10 });
 
 }
 
 $(function() {
 
 setupMonths();
-//moveHighlightToCurrentDay();
+moveHighlightToCurrentDay();
 
 $("#slider").on("click", onSliderClick);
 
@@ -364,7 +377,7 @@ function drawSunLayer() {
 
   var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
   var a = sunrisePos.azimuth;
-  var r = ($(document).height() - $("#slider").outerHeight(true) - $("#header").outerHeight(true)) / 2 - 20;
+  var r = ($(document).height() - $("#slider").outerHeight(true) - $("#header").outerHeight(true)) / 2 - 30;
 
   drawSun(p1.x, p1.y, a, r);
   drawSunPath(p1.x, p1.y, r);
