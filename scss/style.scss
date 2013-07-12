@@ -2,23 +2,45 @@
 @import "compass/css3";
 @import "helpers";
 @import "breakpoint";
-@import "animate";
 
 $breakpoint-medium-width: max-width 700px;
+
+@-webkit-keyframes animate {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes animate {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes animate {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes animate {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
 
 html, body { height:100%; width:100%; margin:0; }
 
 body{
   background: #000;
 
-  &.home {
+  .cover {
+    @include position(0,0,0,0);
+    @include size(100%);
+
     background: url(../img/bkg.jpg) no-repeat center center fixed;
     @include background-size(cover);
+
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.../img/bkg.jpg', sizingMethod='scale');
     -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/bkg.jpg', sizingMethod='scale')";
 
-    /*display:none;*/
-    /*@include animate-fadeOut;*/
+    -webkit-animation: animate 5s; /* Safari 4+ */
+    -moz-animation:    animate 5s; /* Fx 5+ */
+    -o-animation:      animate 5s; /* Opera 12+ */
+    animation:         animate 5s; /* IE 10+ */
 
   }
 
