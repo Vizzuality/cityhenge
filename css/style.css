@@ -332,7 +332,7 @@ a.button:hover {
 }
 #header ul li {
   display: inline;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 #header ul li a {
   font-weight: normal;
