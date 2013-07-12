@@ -60,7 +60,7 @@ function moveHighlightToCurrentDay() {
   var width = currentDayNumber*ratio - getDayNumber(june)*ratio;
 
   $(".highlight").css({ width: width });
-  $(".handle").css({ left: $(".highlight").position().left - 10 });
+  $(".handle").css({ left: width - 10 });
 
 }
 
