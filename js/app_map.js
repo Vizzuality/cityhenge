@@ -146,10 +146,7 @@ function moveHighlightToCurrentDay(animated) {
 
 $(function() {
 
-$(document).ready(function() {
-  if ($.browser.msie && $.browser.version < 9) window.location.href = "/old.html"
-})
-
+  //if ($.browser.msie && $.browser.version < 9) window.location.href = "/old.html";
 
 $("#slider").on("click", onSliderClick);
 
