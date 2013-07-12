@@ -7,6 +7,20 @@ var months      = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"
 var canvas, context, tt, shader, tod, map, curtod, city;
 
 
+$(".embed").on("click", openEmbedWindow);
+
+function openEmbedWindow(e) {
+  e.preventDefault();
+  e.stopPropagation();
+
+
+  var url = '<iframe src="'+ window.location + '" width="800px" height="700px" frameborder="0"></iframe>';
+
+  $(".embedWindow").fadeIn(250);
+  $(".embedWindow p.code").text(url);
+
+}
+
 function zoomIn() {
   if (map.getZoom()<15)
     map.setZoom(map.getZoom() + 1);

@@ -352,3 +352,27 @@ body.map {
   z-index: 10000;
 }
 
+
+.embedWindow {
+  @include box-sizing(border-box);
+  display:none;
+  @include absolute-center(500px, 200px);
+  background:#fff;
+  @include border-radius(3px);
+  z-index: 10000;
+  padding: 20px;
+
+  text-align: left;
+
+  h3 {
+    margin: 0 0 20px 0;
+    font-weight:bold;
+  }
+
+  p {
+    color: #333;
+    &.code { color: #666; }
+
+  }
+}
+

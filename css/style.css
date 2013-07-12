@@ -529,3 +529,34 @@ body.map .credits, body.map .credits a {
   text-indent: -9999px;
   z-index: 10000;
 }
+
+.embedWindow {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -250px;
+  margin-top: -100px;
+  width: 500px;
+  height: 200px;
+  background: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  z-index: 10000;
+  padding: 20px;
+  text-align: left;
+}
+.embedWindow h3 {
+  margin: 0 0 20px 0;
+  font-weight: bold;
+}
+.embedWindow p {
+  color: #333;
+}
+.embedWindow p.code {
+  color: #666;
+}
