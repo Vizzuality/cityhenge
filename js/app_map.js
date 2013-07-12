@@ -70,11 +70,11 @@ function getCurrentDayNumber() {
 function moveHighlightToCurrentDay(animated) {
 
   var currentDayNumber = getCurrentDayNumber();
-  var ratio = Math.floor($(window).width()/365);
+  var ratio = $(window).width()/365;
 
   var june = new Date(2013, 5, 1);
 
-  var width = currentDayNumber*ratio - getDayNumber(june)*ratio;
+  var width = (currentDayNumber - getDayNumber(june))*ratio;
 
   if (animated) {
 
@@ -231,7 +231,9 @@ function onDrag(e) {
   tt = SunCalc.getTimes(time, c.lat, c.lon);
 
   updateDate(w);
+
   curtod = new Date(tt.sunset);
+  //console.log(w, curtod);
 
   drawSunLayer();
 }
