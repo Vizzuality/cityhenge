@@ -77,7 +77,11 @@ function moveHighlightToDate(date, animated) {
 
   var june = new Date(2013, 5, 1);
 
-  var width = (currentDayNumber - getDayNumber(june))*ratio;
+  if (date < june) {
+    date = new Date(2014, date.getMonth(), date.getDay());
+  }
+
+  var width = (date - june)/1000/60/60/24*ratio;
 
   if (animated) {
 
@@ -127,7 +131,6 @@ $("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, { easing: "easeOutQu
     drawSunLayer();
     $(".credits, .cartodb_logo, #zoom").fadeIn(250);
 
-    getTodayDate();
 
 }});
 
@@ -151,15 +154,6 @@ function get_nth_suffix(date) {
   }
 }
 
-function getTodayDate() {
-
-  var today     = new Date();
-  var fullMonth = fullMonths[today.getMonth()];
-  var day       = today.getDate();
-
-  $("#header a span").html("on " + fullMonth + " " + day + get_nth_suffix(day) );
-
-}
 
 function updateDateSpans() {
 
@@ -499,6 +493,24 @@ function drawSunLayer() {
 
 SketchRender.prototype = new VECNIK.Renderer();
 
+function get_nth_suffix(date) {
+  switch (date) {
+    case 1:
+    case 21:
+    case 31:
+      return 'st';
+    case 2:
+    case 22:
+      return 'nd';
+    case 3:
+    case 23:
+      return 'rd';
+    default:
+      return 'th';
+  }
+}
+
+
 var d = new Date(2013, 6, 12);
 
 if (location.hash) {
@@ -508,9 +520,20 @@ if (location.hash) {
   d = new Date(2013, month - 1, day);
 
   moveHighlightToDate(d);
+
+  var fullMonth = fullMonths[d.getMonth()];
+
+  $("#header a span").html("on " + fullMonth + " " + day + get_nth_suffix(day) );
+
 } else {
 
   moveHighlightToCurrentDay(true);
+
+  var today     = new Date();
+  var fullMonth = fullMonths[today.getMonth()];
+  var day       = today.getDate();
+
+  $("#header a span").html("on " + fullMonth + " " + day + get_nth_suffix(day) );
 }
 
 var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
@@ -518,7 +541,7 @@ var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
 function initMap(options) {
   city = options;
   tod = new Date(utc + (3600000 * city.offset));
-  console.log(tod);
+
   var tt = SunCalc.getTimes(tod, city.y, city.x );
   curtod = new Date(tt.sunset);
 
