@@ -55,7 +55,7 @@ function getCurrentDayNumber() {
   return Math.floor(diff / oneDay);
 }
 
-function moveHighlightToCurrentDay() {
+function moveHighlightToCurrentDay(animated) {
 
   var currentDayNumber = getCurrentDayNumber();
   var ratio = Math.floor($(window).width()/365);
@@ -64,8 +64,16 @@ function moveHighlightToCurrentDay() {
 
   var width = currentDayNumber*ratio - getDayNumber(june)*ratio;
 
-  $(".highlight").css({ width: width });
-  $(".handle").css({ left: width - 10 });
+  if (animated) {
+
+    $(".highlight").animate({ width: width }, { duration: 250, complete: function() {
+        $(".handle").css({ left: width - 10 });
+    }});
+
+    } else {
+    $(".highlight").css({ width: width });
+    $(".handle").css({ left: width - 10 });
+  }
 
 }
 
@@ -73,10 +81,11 @@ $(function() {
 
 // Start animations
 $("#header").delay(1000).animate({ opacity: 1, top: 0    }, 250);
-$("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, 250);
+$("#slider").delay(1000).animate({ opacity: 1, bottom: 0 }, { duration: 250, complete: function() {
+    moveHighlightToCurrentDay(true);
+}});
 
 setupMonths();
-moveHighlightToCurrentDay();
 
 $("#slider").on("click", onSliderClick);
 

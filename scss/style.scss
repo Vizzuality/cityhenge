@@ -260,18 +260,15 @@ a.button:hover{
 
   .handle {
     @include size(20px, $sliderHeight);
-    top: 0px;
-    left: 110px;
+    @include position(0, false, false, 0);
     cursor: ew-resize;
     z-index: 100;
   }
 
   .highlight {
+    @include size(0, $sliderHeight);
+    @include position(0, false, false, 0);
     background: #0099EF;
-    @include size(120px, $sliderHeight);
-    position:absolute;
-    top: 0px;
-    left: 0;
     z-index: 1;
   }
 }
