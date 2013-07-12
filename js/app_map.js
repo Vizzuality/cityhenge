@@ -306,10 +306,11 @@ function drawSunLine(x, y, azimuth, length) {
 * */
 function drawSun(x, y, azimuth, length) {
 
-  var angle = azimuth*180 / Math.PI;
+  var angle = azimuth*Math.PI/180 ;
 
   var x1 = x + Math.cos(angle) * length;
   var y1 = y + Math.sin(angle) * length;
+  console.log("angle", angle);
 
   context.beginPath();
   context.arc(x1, y1, 15, 0, 2 * Math.PI, false);
