@@ -1,6 +1,6 @@
 var months  = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var months2 = ["Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"];
-var context, tt, shader, tod, map, curtod, city;
+var canvas, context, tt, shader, tod, map, curtod, city;
 
 function adjustMonths(l) {
 
@@ -144,6 +144,8 @@ function onDrag(e) {
 
   updateDate(w);
   curtod = new Date(tt.sunset);
+
+  drawSunLayer();
 }
 
 function onDragStart(e) {
@@ -270,8 +272,8 @@ var primitive_render = this.primitive_render = {
 
 function drawSunLayerLine(x, y, azimuth, length) {
 
+
   context.beginPath();
-  context.moveTo(x, y);
 
   var angle = azimuth*180 / Math.PI;
 
@@ -280,7 +282,9 @@ function drawSunLayerLine(x, y, azimuth, length) {
 
   console.log(angle);
 
+  context.moveTo(x, y);
   context.lineTo(x1, y1);
+
   context.globalAlpha = 0.3;
   context.restore();
 
@@ -316,6 +320,8 @@ function drawSunPath(x, y, radius) {
 }
 
 function drawSunLayer() {
+
+  canvas.width = canvas.width;
 
   var cen = map.getCenter();
 
@@ -390,7 +396,7 @@ function initMap(options) {
     map.setCenterZoom(new MM.Location(city.y, city.x ), city.z);
   }
 
-  var canvas = document.getElementById("sun");
+  canvas  = document.getElementById("sun");
   context = canvas.getContext("2d");
 
   canvas.width  = $(document).width();
