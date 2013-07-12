@@ -329,13 +329,15 @@ a.button:hover {
 #header ul li {
   float: left;
   display: inline;
-  margin-left: 5px;
 }
 #header ul li.about {
   margin-right: 10px;
 }
 #header ul li.facebook {
   margin-left: -20px;
+}
+#header ul li.twitter {
+  margin-left: 10px;
 }
 #header ul li a {
   font-weight: normal;
