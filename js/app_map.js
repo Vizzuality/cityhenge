@@ -178,7 +178,7 @@ function onSliderClick(e) {
 
 function onDrag(e) {
 
-  var ratio = $(document).width()/365;
+  var ratio = $(window).width()/365;
 
   var w = $(e.target).position().left
   $(".highlight").width(w + 10);
@@ -189,6 +189,7 @@ function onDrag(e) {
   updateDate(w);
   curtod = new Date(tt.sunset);
 
+  console.log(curtod);
   drawSunLayer();
 }
 
