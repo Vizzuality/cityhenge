@@ -238,17 +238,18 @@ function onSliderClick(e) {
   var cen = map.getCenter();
   var sunrisePos = SunCalc.getPosition(curtod, cen.lat, cen.lon);
 
-  $(".handle").css({ left: w - 10 });
-  $(".highlight").animate({ width: w + "px"}, 150);
+  $(".handle").css({ opacity: 0 });
+  $(".highlight").animate({ width: w + "px"}, { duration: 150, complete: function() {
+    $(".handle").css({ left: w - 10, opacity: 1 });
+  }});
 
   $(".date").stop().fadeIn(250, function() {
     $(this).delay(2000).fadeOut(250);
     updateMap();
+    drawSunLayer();
+    updateHash();
   });
-
-  drawSunLayer();
   updateDate(w - 10);
-  updateHash();
 
 }
 
